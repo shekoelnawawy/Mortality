@@ -62,7 +62,7 @@ import sys
 sys.path.append('../URET')
 from URET.uret.utils.config import process_config_file
 cf = "URET/brute.yml"
-exit(1)
+
 def feature_extractor(x):
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
     return torch.tensor(x, dtype=torch.float).to(device)
@@ -258,7 +258,37 @@ class DL_models():
         for nbatch in range(int(len(test_hids)/(args.batch_size))):
             #print(test_hids[nbatch*args.batch_size:(nbatch+1)*args.batch_size])
             meds,chart,out,proc,lab,stat,demo,y=self.getXY(test_hids[nbatch*args.batch_size:(nbatch+1)*args.batch_size],labels)
-            
+
+            # Nawawy's MIMIC start
+            # CALL URET HERE
+
+            explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
+            explorer.scoring_function = self.loss
+            explore_params = [allPatients_benign, backcast_length, nv]
+            allPatients_adversarial = np.array(explorer.explore(explore_params))
+
+            allPatients_benign = allPatients_benign.reshape(-1, backcast_length, nv)  # 15701, 12, 7
+            allPatients_postprandial = allPatients_postprandial.reshape(-1, backcast_length, nv + 1)  # 15701, 12, 8
+            for i in range(len(allPatients_adversarial)):
+                if allPatients_adversarial[i] is None:
+                    allPatients_adversarial[i] = allPatients_benign[i].reshape(1, backcast_length, nv).copy()
+                if i == 0:
+                    temp = allPatients_adversarial[i].reshape(1, backcast_length, nv)
+                else:
+                    temp = np.append(temp, allPatients_adversarial[i].reshape(1, backcast_length, nv))
+
+            allPatients_adversarial = temp.reshape((1, len(allPatients_adversarial) * backcast_length, nv))
+
+            testgen = ordered_data(batch_size, backcast_length, forecast_length, allPatients_adversarial)
+
+            if backcast_length == 12:
+                allPatients_adversarial = allPatients_adversarial.reshape(-1, backcast_length, nv)  # 15701, 12, 7
+                joblib.dump(allPatients_postprandial, maindir + '/benign_data.pkl')
+                joblib.dump(allPatients_adversarial, maindir + '/adversarial_data.pkl')
+
+            # Nawawy's MIMIC end
+
+
             output,logits = self.net(meds,chart,out,proc,lab,stat,demo)
 #             self.model_interpret([meds,chart,out,proc,lab,stat,demo])
             output=output.squeeze()
