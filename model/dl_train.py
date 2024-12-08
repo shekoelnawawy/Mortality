@@ -85,11 +85,13 @@ class DL_models():
         self.eth_vocab_size,self.gender_vocab_size,self.age_vocab_size,self.ins_vocab_size=len(self.eth_vocab),len(self.gender_vocab),len(self.age_vocab),len(self.ins_vocab)
         
         self.loss=evaluation.Loss('cpu',True,True,True,True,True,True,True,True,True,True,True)
-#        if torch.cuda.is_available():
-#            self.device='cuda:0'
-#        else:
-#            self.device='cpu'
-        self.device='cpu'
+        if torch.cuda.is_available():
+           self.device='cuda:0'
+        else:
+           self.device='cpu'
+        # Nawawy's MIMIC start
+        # self.device='cpu'
+        # Nawawy's MIMIC end
         if train:
             print("===============MODEL TRAINING===============")
             self.dl_train()
@@ -98,6 +100,7 @@ class DL_models():
             self.net=torch.load(self.save_path)
             print("[ MODEL LOADED ]")
             print(self.net)
+
         
         
         
@@ -141,7 +144,7 @@ class DL_models():
 
     def dl_train(self):
         k_hids=self.create_kfolds()
-        
+
         labels=pd.read_csv('./data/csv/labels.csv', header=0)
         for i in range(self.k_fold):
             self.create_model(self.model_type)
@@ -154,7 +157,7 @@ class DL_models():
             train_ids=list(set([0,1,2,3,4])-set([i]))
             train_hids=[]
             for j in train_ids:
-                train_hids.extend(k_hids[j])  
+                train_hids.extend(k_hids[j])
             #print(test_hids)
             #train_hids=train_hids[0:200]
             val_hids=random.sample(train_hids,int(len(train_hids)*0.1))
