@@ -56,6 +56,17 @@ from parameters import *
 importlib.reload(evaluation)
 import evaluation
 
+# Nawawy's start
+import sys
+
+sys.path.append('../URET')
+from URET.uret.utils.config import process_config_file
+cf = "URET/brute.yml"
+exit(1)
+def feature_extractor(x):
+    device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    return torch.tensor(x, dtype=torch.float).to(device)
+# Nawawy's end
 
 class DL_models():
     def __init__(self,data_icu,diag_flag,proc_flag,out_flag,chart_flag,med_flag,lab_flag,model_type,k_fold,oversampling,model_name,train):
