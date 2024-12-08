@@ -57,6 +57,7 @@ importlib.reload(evaluation)
 import evaluation
 
 # Nawawy's MIMIC start
+import joblib
 import sys
 
 sys.path.append('../URET')
@@ -102,6 +103,14 @@ class DL_models():
             print("[ MODEL LOADED ]")
             print(self.net)
 
+            # Nawawy's MIMIC start
+            k_hids = joblib.load('./k_hids/k_hids.pkl')
+            for i in range(self.k_fold):
+                print("==================={0:2d} FOLD=====================".format(i))
+                test_hids = list(k_hids[i])
+                self.model_test(test_hids)
+            # Nawawy's MIMIC end
+
         
         
         
@@ -145,6 +154,12 @@ class DL_models():
 
     def dl_train(self):
         k_hids=self.create_kfolds()
+
+        # Nawawy's MIMIC start
+        if not os.path.exists("k_hids"):
+            os.makedirs("k_hids")
+        joblib.dump(k_hids, './k_hids')
+        # Nawawy's MIMIC end
 
         labels=pd.read_csv('./data/csv/labels.csv', header=0)
         for i in range(self.k_fold):
