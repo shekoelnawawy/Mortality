@@ -89,6 +89,8 @@ class DL_models():
            self.device='cuda:0'
         else:
            self.device='cpu'
+        print(self.device)
+        exit(1)
         # Nawawy's MIMIC start
         # self.device='cpu'
         # Nawawy's MIMIC end
