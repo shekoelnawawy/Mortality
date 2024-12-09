@@ -170,7 +170,6 @@ class GraphExplorer(ABC):
             print(chart[i].shape)
             print(out[i].shape)
             print(proc[i].shape)
-            print(lab[i].shape)
             print(stat[i].shape)
             print(demo[i].shape)
             exit(1)
