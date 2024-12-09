@@ -170,16 +170,6 @@ class GraphExplorer(ABC):
             # Score the current sample
             score = self.scoring_function(sample_next, score_input)
 
-            # Early exit conditions
-            # If using feature loss, then we can early exit once the target features are attained
-            # Maybe consider a "close-enough" condition instead?
-            if self.scoring_alg == "feature_loss" and np.array_equal(
-                    target_features[i], self.feature_extractor(sample_next)
-            ):
-                best_sample = sample_next
-                best_score = score
-                break
-
             # For all loss types, we can early exit if an adversarial example is found
             new_prediction = self.model_predict(self.feature_extractor(sample_next))
             if len(np.shape(new_prediction)) == 2:
