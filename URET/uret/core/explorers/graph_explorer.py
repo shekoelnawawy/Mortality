@@ -172,8 +172,10 @@ class GraphExplorer(ABC):
             print(proc[i].shape)
             print(stat[i].shape)
             print(demo[i].shape)
+            original_pred, logits = self.model_predict(meds[i], chart[i], out[i], proc[i], lab, stat[i], demo[i])
+            print(original_pred)
+            print(logits)
             exit(1)
-            original_pred = self.model_predict(self.feature_extractor(sample))
             if len(np.shape(original_pred)) == 2:
                 original_pred = original_pred[0]
 
