@@ -164,12 +164,16 @@ class GraphExplorer(ABC):
         print(x[5].shape)
         print(x[6].shape)
         # Nawawy's MIMIC end
+
+        original_pred, logits = self.model_predict(meds, chart, out, proc, lab, stat, demo)
+
         print(meds[0].unsqueeze(0).shape)
         print(chart[0].unsqueeze(0).shape)
         print(out[0].unsqueeze(0).shape)
         print(proc[0].unsqueeze(0).shape)
         print(stat[0].unsqueeze(0).shape)
         print(demo[0].unsqueeze(0).shape)
+
         original_pred, logits = self.model_predict(meds[0].unsqueeze(0), chart[0].unsqueeze(0), out[0].unsqueeze(0),
                                                    proc[0].unsqueeze(0), lab, stat[0].unsqueeze(0),
                                                    demo[0].unsqueeze(0))
