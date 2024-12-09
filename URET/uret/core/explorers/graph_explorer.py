@@ -146,7 +146,7 @@ class GraphExplorer(ABC):
         if return_record:
             records = []
 
-        print(x.size)
+        print(x.shape)
         exit(1)
 
         for i, sample in enumerate(tqdm.tqdm(x)):
