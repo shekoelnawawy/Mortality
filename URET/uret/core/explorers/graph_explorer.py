@@ -170,7 +170,7 @@ class GraphExplorer(ABC):
 
         if len(np.shape(original_pred)) == 2:
             original_pred = original_pred[0]
-        print(original_pred.shape)
+        print(original_pred)
 
         exit(1)
         for i, sample in enumerate(tqdm.tqdm(x)):
