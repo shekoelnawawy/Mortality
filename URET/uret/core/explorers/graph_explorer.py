@@ -173,6 +173,7 @@ class GraphExplorer(ABC):
             print(proc[i].unsqueeze(0).shape)
             print(stat[i].unsqueeze(0).shape)
             print(demo[i].unsqueeze(0).shape)
+            exit(1)
             original_pred, logits = self.model_predict(meds[i].unsqueeze(0), chart[i].unsqueeze(0), out[i].unsqueeze(0), proc[i].unsqueeze(0), lab, stat[i].unsqueeze(0), demo[i].unsqueeze(0))
             print(original_pred)
             print(logits)
