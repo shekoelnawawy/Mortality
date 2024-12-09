@@ -158,7 +158,7 @@ class DL_models():
         # Nawawy's MIMIC start
         if not os.path.exists("k_hids"):
             os.makedirs("k_hids")
-        joblib.dump(k_hids, './k_hids')
+        joblib.dump(k_hids, './k_hids/k_hids.pkl')
         # Nawawy's MIMIC end
 
         labels=pd.read_csv('./data/csv/labels.csv', header=0)
