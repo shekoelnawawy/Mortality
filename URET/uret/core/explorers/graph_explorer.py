@@ -158,7 +158,7 @@ class GraphExplorer(ABC):
 
         # x = chart
         # Nawawy's end
-
+        print(x.shape)
         for i, sample in enumerate(tqdm.tqdm(x)):
             # Nawawy's start
             # sample = sample.reshape(1, backcast, nv)
