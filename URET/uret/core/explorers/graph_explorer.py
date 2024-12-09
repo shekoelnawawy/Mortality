@@ -168,6 +168,8 @@ class GraphExplorer(ABC):
         original_pred, logits = self.model_predict(meds, chart, out, proc, lab, stat, demo)
         print(original_pred.shape)
         print(original_pred.unsqueeze(0).shape)
+
+        print(original_pred)
         if len(np.shape(original_pred)) == 2:
             original_pred = original_pred[0]
         print(original_pred)
