@@ -156,7 +156,13 @@ class GraphExplorer(ABC):
         lab = x[4]
         stat = x[5]
         demo = x[6]
-        print(x.shape)
+        print(x[0].shape)
+        print(x[1].shape)
+        print(x[2].shape)
+        print(x[3].shape)
+        print(x[4].shape)
+        print(x[5].shape)
+        print(x[6].shape)
         # Nawawy's MIMIC end
 
         for i, sample in enumerate(tqdm.tqdm(x)):
