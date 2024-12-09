@@ -146,12 +146,24 @@ class GraphExplorer(ABC):
         if return_record:
             records = []
 
+        # Nawawy's start
+        # [meds, chart, out, proc, lab, stat, demo]
+        meds = x[0]
+        chart = x[1]
+        out = x[2]
+        proc = x[3]
+        lab = x[4]
+        stat = x[5]
+        demp = x[6]
+
+        # x = chart
+        # Nawawy's end
+
         for i, sample in enumerate(tqdm.tqdm(x)):
             # Nawawy's start
-            print(sample)
+            # sample = sample.reshape(1, backcast, nv)
             print(sample.shape)
             exit(1)
-            sample = sample.reshape(1, backcast, nv)
             original_pred,_,_,_,_ = self.model_predict(self.feature_extractor(sample))
             # Nawawy's end
             if len(np.shape(original_pred)) == 2:
