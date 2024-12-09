@@ -285,6 +285,9 @@ class DL_models():
             if adversary:
                 explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
                 explorer.scoring_function = self.loss
+
+                explorer.explore(chart)
+
                 explore_params = [allPatients_benign, backcast_length, nv]
                 allPatients_adversarial = np.array(explorer.explore(explore_params))
 

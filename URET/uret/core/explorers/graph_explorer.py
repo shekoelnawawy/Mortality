@@ -146,11 +146,8 @@ class GraphExplorer(ABC):
         if return_record:
             records = []
 
-        # Nawawy's start
-        backcast = x[1]
-        nv = x[2]
-        x = x[0]
-        # Nawawy's end
+        print(x)
+        exit(1)
 
         for i, sample in enumerate(tqdm.tqdm(x)):
             # Nawawy's start
