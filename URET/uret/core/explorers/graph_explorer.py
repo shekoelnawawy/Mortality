@@ -166,7 +166,7 @@ class GraphExplorer(ABC):
         score_input = original_pred
 
         for sample_next, transformation_record, _ in self.search(chart, score_input):
-
+            print('True')
             # Score the current sample
             score = self.scoring_function(sample_next, score_input)
 
