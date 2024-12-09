@@ -166,14 +166,13 @@ class GraphExplorer(ABC):
         # Nawawy's MIMIC end
 
         for i, sample in enumerate(tqdm.tqdm(x)):
-            # print(meds[i].shape)
-            # print(meds[i].unsqueeze(0).shape)
-            # exit(1)
-            # print(chart[i].shape)
-            # print(out[i].shape)
-            # print(proc[i].shape)
-            # print(stat[i].shape)
-            # print(demo[i].shape)
+            print(sample.shape)
+            print(meds[i].unsqueeze(0).shape)
+            print(chart[i].unsqueeze(0).shape)
+            print(out[i].unsqueeze(0).shape)
+            print(proc[i].unsqueeze(0).shape)
+            print(stat[i].unsqueeze(0).shape)
+            print(demo[i].unsqueeze(0).shape)
             original_pred, logits = self.model_predict(meds[i].unsqueeze(0), chart[i].unsqueeze(0), out[i].unsqueeze(0), proc[i].unsqueeze(0), lab, stat[i].unsqueeze(0), demo[i].unsqueeze(0))
             print(original_pred)
             print(logits)
