@@ -167,7 +167,7 @@ class GraphExplorer(ABC):
 
         for i, sample in enumerate(tqdm.tqdm(x)):
             print(meds[i].shape)
-            print(torch.unsqueeze(meds[i],0).shape)
+            print(meds[i].unsqueeze(0).shape)
             exit(1)
             print(chart[i].shape)
             print(out[i].shape)
