@@ -166,7 +166,13 @@ class GraphExplorer(ABC):
         # Nawawy's MIMIC end
 
         for i, sample in enumerate(tqdm.tqdm(x)):
-            print(sample.shape)
+            print(meds[i].shape)
+            print(chart[i].shape)
+            print(out[i].shape)
+            print(proc[i].shape)
+            print(lab[i].shape)
+            print(stat[i].shape)
+            print(demo[i].shape)
             exit(1)
             original_pred = self.model_predict(self.feature_extractor(sample))
             if len(np.shape(original_pred)) == 2:
