@@ -70,7 +70,7 @@ def feature_extractor(x):
 # Nawawy's MIMIC end
 
 class DL_models():
-    def __init__(self,data_icu,diag_flag,proc_flag,out_flag,chart_flag,med_flag,lab_flag,model_type,k_fold,oversampling,model_name,train,adversary=False):
+    def __init__(self,data_icu,diag_flag,proc_flag,out_flag,chart_flag,med_flag,lab_flag,model_type,k_fold,oversampling,model_name,train):
         self.save_path="saved_models/"+model_name+".tar"
         self.data_icu=data_icu
         self.diag_flag,self.proc_flag,self.out_flag,self.chart_flag,self.med_flag,self.lab_flag=diag_flag,proc_flag,out_flag,chart_flag,med_flag,lab_flag
