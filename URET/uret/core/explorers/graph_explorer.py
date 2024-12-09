@@ -210,6 +210,7 @@ class GraphExplorer(ABC):
 
         generated_samples.append(best_sample)
         # Nawawy's MIMIC end
+        exit(1)
         for i, sample in enumerate(tqdm.tqdm(x)):
             original_pred, logits = self.model_predict(meds[i].unsqueeze(0), chart[i].unsqueeze(0), out[i].unsqueeze(0), proc[i].unsqueeze(0), lab, stat[i].unsqueeze(0), demo[i].unsqueeze(0))
             if len(np.shape(original_pred)) == 2:
