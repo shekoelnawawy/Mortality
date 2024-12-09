@@ -173,11 +173,11 @@ class GraphExplorer(ABC):
         print(proc[0].unsqueeze(0).shape)
         print(stat[0].unsqueeze(0).shape)
         print(demo[0].unsqueeze(0).shape)
-
+        exit(1)
         original_pred, logits = self.model_predict(meds[0].unsqueeze(0), chart[0].unsqueeze(0), out[0].unsqueeze(0),
                                                    proc[0].unsqueeze(0), lab, stat[0].unsqueeze(0),
                                                    demo[0].unsqueeze(0))
-        exit(1)
+
         for i, sample in enumerate(tqdm.tqdm(x)):
             print(sample.shape)
             print(meds[i].unsqueeze(0).shape)
