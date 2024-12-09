@@ -70,7 +70,7 @@ def feature_extractor(x):
 # Nawawy's MIMIC end
 
 class DL_models():
-    def __init__(self,data_icu,diag_flag,proc_flag,out_flag,chart_flag,med_flag,lab_flag,model_type,k_fold,oversampling,model_name,train):
+    def __init__(self,data_icu,diag_flag,proc_flag,out_flag,chart_flag,med_flag,lab_flag,model_type,k_fold,oversampling,model_name,train,adversary=False):
         self.save_path="saved_models/"+model_name+".tar"
         self.data_icu=data_icu
         self.diag_flag,self.proc_flag,self.out_flag,self.chart_flag,self.med_flag,self.lab_flag=diag_flag,proc_flag,out_flag,chart_flag,med_flag,lab_flag
@@ -109,7 +109,7 @@ class DL_models():
             for i in range(self.k_fold):
                 print("==================={0:2d} FOLD=====================".format(i))
                 test_hids = list(k_hids[i])
-                self.model_test(test_hids)
+                self.model_test(test_hids, adversary=True)
             # Nawawy's MIMIC end
 
         
@@ -260,9 +260,10 @@ class DL_models():
         self.loss(torch.tensor(val_prob),torch.tensor(val_truth),torch.tensor(val_logits),False,False)
         val_loss=self.loss(torch.tensor(val_prob),torch.tensor(val_truth),torch.tensor(val_logits),True,False)
         return val_loss.item()
-            
-    def model_test(self,test_hids):
-        
+
+    # Nawawy's MIMIC start
+    def model_test(self,test_hids, adversary=False):
+    # Nawawy's MIMIC end
         print("======= TESTING ========")
         labels=pd.read_csv('./data/csv/labels.csv', header=0)
         
@@ -281,33 +282,32 @@ class DL_models():
 
             # Nawawy's MIMIC start
             # CALL URET HERE
+            if adversary:
+                explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
+                explorer.scoring_function = self.loss
+                explore_params = [allPatients_benign, backcast_length, nv]
+                allPatients_adversarial = np.array(explorer.explore(explore_params))
 
-            explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
-            explorer.scoring_function = self.loss
-            explore_params = [allPatients_benign, backcast_length, nv]
-            allPatients_adversarial = np.array(explorer.explore(explore_params))
+                allPatients_benign = allPatients_benign.reshape(-1, backcast_length, nv)  # 15701, 12, 7
+                allPatients_postprandial = allPatients_postprandial.reshape(-1, backcast_length, nv + 1)  # 15701, 12, 8
+                for i in range(len(allPatients_adversarial)):
+                    if allPatients_adversarial[i] is None:
+                        allPatients_adversarial[i] = allPatients_benign[i].reshape(1, backcast_length, nv).copy()
+                    if i == 0:
+                        temp = allPatients_adversarial[i].reshape(1, backcast_length, nv)
+                    else:
+                        temp = np.append(temp, allPatients_adversarial[i].reshape(1, backcast_length, nv))
 
-            allPatients_benign = allPatients_benign.reshape(-1, backcast_length, nv)  # 15701, 12, 7
-            allPatients_postprandial = allPatients_postprandial.reshape(-1, backcast_length, nv + 1)  # 15701, 12, 8
-            for i in range(len(allPatients_adversarial)):
-                if allPatients_adversarial[i] is None:
-                    allPatients_adversarial[i] = allPatients_benign[i].reshape(1, backcast_length, nv).copy()
-                if i == 0:
-                    temp = allPatients_adversarial[i].reshape(1, backcast_length, nv)
-                else:
-                    temp = np.append(temp, allPatients_adversarial[i].reshape(1, backcast_length, nv))
+                allPatients_adversarial = temp.reshape((1, len(allPatients_adversarial) * backcast_length, nv))
 
-            allPatients_adversarial = temp.reshape((1, len(allPatients_adversarial) * backcast_length, nv))
+                testgen = ordered_data(batch_size, backcast_length, forecast_length, allPatients_adversarial)
 
-            testgen = ordered_data(batch_size, backcast_length, forecast_length, allPatients_adversarial)
-
-            if backcast_length == 12:
-                allPatients_adversarial = allPatients_adversarial.reshape(-1, backcast_length, nv)  # 15701, 12, 7
-                joblib.dump(allPatients_postprandial, maindir + '/benign_data.pkl')
-                joblib.dump(allPatients_adversarial, maindir + '/adversarial_data.pkl')
+                if backcast_length == 12:
+                    allPatients_adversarial = allPatients_adversarial.reshape(-1, backcast_length, nv)  # 15701, 12, 7
+                    joblib.dump(allPatients_postprandial, maindir + '/benign_data.pkl')
+                    joblib.dump(allPatients_adversarial, maindir + '/adversarial_data.pkl')
 
             # Nawawy's MIMIC end
-
 
             output,logits = self.net(meds,chart,out,proc,lab,stat,demo)
 #             self.model_interpret([meds,chart,out,proc,lab,stat,demo])
