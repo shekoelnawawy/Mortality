@@ -288,9 +288,9 @@ class DL_models():
                 explorer.scoring_function = self.loss
 
                 explore_params = [meds, chart, out, proc, lab, stat, demo]
+                terminal_output = open('/dev/stdout', 'w')
                 print('meds')
-                meds.shape
-                print(meds.shape)
+                print(meds.shape, file=terminal_output)
                 print('--------------------------------------')
                 print('chart')
                 print(chart.shape)
