@@ -289,6 +289,7 @@ class DL_models():
 
                 explore_params = [meds, chart, out, proc, lab, stat, demo]
                 print('meds')
+                meds.shape
                 print(meds.shape)
                 print('--------------------------------------')
                 print('chart')
