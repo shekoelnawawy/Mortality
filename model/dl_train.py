@@ -288,6 +288,28 @@ class DL_models():
                 explorer.scoring_function = self.loss
 
                 explore_params = [meds, chart, out, proc, lab, stat, demo]
+                print('meds')
+                print(meds.shape)
+                print('--------------------------------------')
+                print('chart')
+                print(chart.shape)
+                print('--------------------------------------')
+                print('out')
+                print(out.shape)
+                print('--------------------------------------')
+                print('proc')
+                print(proc.shape)
+                print('--------------------------------------')
+                print('lab')
+                print(lab.shape)
+                print('--------------------------------------')
+                print('stat')
+                print(stat.shape)
+                print('--------------------------------------')
+                print('demo')
+                print(demo.shape)
+                print('--------------------------------------')
+                exit(1)
                 explorer.explore(explore_params)
 
 
