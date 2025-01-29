@@ -287,13 +287,13 @@ class DL_models():
                 explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
                 explorer.scoring_function = self.loss
 
-                explore_params = [meds, chart, out, proc, lab, stat, demo]
-                terminal_output = open('/dev/stdout', 'w')
-                print(chart.shape, file=terminal_output)
-                print(chart.shape[0], file=terminal_output)
-                print(chart.shape[1], file=terminal_output)
-                print(chart.shape[2], file=terminal_output)
-                exit(1)
+                allPatients_benign = meds, chart, out, proc, lab, stat, demo
+                explore_params = [allPatients_benign, chart.shape[1], chart.shape[2]]
+                # terminal_output = open('/dev/stdout', 'w')
+                # print(chart.shape, file=terminal_output)
+                # print(chart.shape[0], file=terminal_output)
+                # print(chart.shape[1], file=terminal_output)
+                # print(chart.shape[2], file=terminal_output)
                 # print('meds')
                 # print(meds.shape, file=terminal_output)
                 # print('--------------------------------------')

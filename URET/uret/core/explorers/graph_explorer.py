@@ -151,16 +151,11 @@ class GraphExplorer(ABC):
 
         terminal_output = open('/dev/stdout', 'w')
         # [meds, chart, out, proc, lab, stat, demo]
-        meds = x[0]
-        chart = x[1]
-        out = x[2]
-        proc = x[3]
-        lab = x[4]
-        stat = x[5]
-        demo = x[6]
+        backcast = x[1]
+        nv = x[2]
+        x = x[0]
 
-
-        original_pred, logits = self.model_predict(meds, chart, out, proc, lab, stat, demo)
+        original_pred, logits = self.model_predict(x[0], x[1], x[2], x[2], x[3], x[4], x[5])
         # print(original_pred, file=terminal_output)
         # print(original_pred.shape, file=terminal_output)
         # print(chart.shape, file=terminal_output)
@@ -169,8 +164,9 @@ class GraphExplorer(ABC):
         if return_record:
             best_record = None
         score_input = original_pred
-
-        for sample_next, transformation_record, _ in self.search(chart, score_input):
+        print(original_pred, file=terminal_output)
+        exit(1)
+        for sample_next, transformation_record, _ in self.search([x[0], x[1], x[2], x[2], x[3], x[4], x[5], backcast, nv], score_input):
             print('True', file=terminal_output)
             # Score the current sample
             score = self.scoring_function(sample_next, score_input)
