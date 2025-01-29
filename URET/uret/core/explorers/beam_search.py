@@ -64,6 +64,8 @@ class BeamSearchGraphExplorer(GraphExplorer):
         :param depth: current depth of search.
         """
         # Nawawy's start
+        terminal_output = open('/dev/stdout', 'w')
+        print('hello', file=terminal_output)
         backcast = sample[1]
         nv = sample[2]
         sample = sample[0]
