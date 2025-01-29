@@ -109,7 +109,7 @@ class DL_models():
             for i in range(self.k_fold):
                 print("==================={0:2d} FOLD=====================".format(i))
                 test_hids = list(k_hids[i])
-                self.model_test(test_hids, adversary=True)
+                self.model_test(test_hids, adversary=False)
             # Nawawy's MIMIC end
 
         
@@ -339,6 +339,7 @@ class DL_models():
 
             output,logits = self.net(meds,chart,out,proc,lab,stat,demo)
 #             self.model_interpret([meds,chart,out,proc,lab,stat,demo])
+            exit(1)
             output=output.squeeze()
             logits=logits.squeeze()
 #             print(demo.shape)
