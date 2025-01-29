@@ -287,14 +287,32 @@ class DL_models():
                 explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
                 explorer.scoring_function = self.loss
 
-                explore_params = chart
-                terminal_output = open('/dev/stdout', 'w')
-                print('chart')
-                print(chart.shape, file=terminal_output)
-                print('--------------------------------------')
+                explore_params = [meds, chart, out, proc, lab, stat, demo]
+                # terminal_output = open('/dev/stdout', 'w')
+                # print('meds')
+                # print(meds.shape, file=terminal_output)
+                # print('--------------------------------------')
+                # print('chart')
+                # print(chart.shape, file=terminal_output)
+                # print('--------------------------------------')
+                # print('out')
+                # print(out.shape, file=terminal_output)
+                # print('--------------------------------------')
+                # print('proc')
+                # print(proc.shape, file=terminal_output)
+                # print('--------------------------------------')
+                # print('lab')
+                # print(lab.shape, file=terminal_output)
+                # print('--------------------------------------')
+                # print('stat')
+                # print(stat.shape, file=terminal_output)
+                # print('--------------------------------------')
+                # print('demo')
+                # print(demo.shape, file=terminal_output)
+                # print('--------------------------------------')
 
                 explorer.explore(explore_params)
-                exit(1)
+
 
                 allPatients_adversarial = np.array(explorer.explore(explore_params))
 
