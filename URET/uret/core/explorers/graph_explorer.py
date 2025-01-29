@@ -161,9 +161,9 @@ class GraphExplorer(ABC):
 
 
         original_pred, logits = self.model_predict(meds, chart, out, proc, lab, stat, demo)
-        print(original_pred, file=terminal_output)
-        print(original_pred.shape, file=terminal_output)
-        print(chart.shape, file=terminal_output)
+        # print(original_pred, file=terminal_output)
+        # print(original_pred.shape, file=terminal_output)
+        # print(chart.shape, file=terminal_output)
         best_sample = None
         best_score = np.inf
         if return_record:
@@ -171,7 +171,7 @@ class GraphExplorer(ABC):
         score_input = original_pred
 
         for sample_next, transformation_record, _ in self.search(chart, score_input):
-            print('True')
+            print('True', file=terminal_output)
             # Score the current sample
             score = self.scoring_function(sample_next, score_input)
 
@@ -204,8 +204,8 @@ class GraphExplorer(ABC):
             records.append(best_record)
 
         generated_samples.append(best_sample)
-        print('generated_samples', file=terminal_output)
-        print(generated_samples, file=terminal_output)
+        # print('generated_samples', file=terminal_output)
+        # print(generated_samples, file=terminal_output)
         print('-------------------------------------------', file=terminal_output)
         # Nawawy's MIMIC end
         exit(1)
