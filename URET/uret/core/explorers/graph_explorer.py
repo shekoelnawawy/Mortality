@@ -199,6 +199,8 @@ class GraphExplorer(ABC):
             records.append(best_record)
 
         generated_samples.append(best_sample)
+        terminal_output = open('/dev/stdout', 'w')
+        print(generated_samples, file=terminal_output)
         # Nawawy's MIMIC end
         exit(1)
         for i, sample in enumerate(tqdm.tqdm(x)):
