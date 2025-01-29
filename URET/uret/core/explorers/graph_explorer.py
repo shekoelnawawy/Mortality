@@ -163,6 +163,7 @@ class GraphExplorer(ABC):
         original_pred, logits = self.model_predict(meds, chart, out, proc, lab, stat, demo)
         print(original_pred, file=terminal_output)
         print(original_pred.shape, file=terminal_output)
+        print(chart.shape, file=terminal_output)
         best_sample = None
         best_score = np.inf
         if return_record:
