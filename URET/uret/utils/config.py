@@ -27,9 +27,7 @@ def process_config_file(config_filepath, model, feature_extractor=None, input_pr
     ranker_params = config_params.get("ranker_params", None)
     explorer_params = config_params.get("explorer_params", None)
     dependency_params = config_params.get("dependency_params", None)
-    terminal_output = open('/dev/stdout', 'w')
-    print(transformer_params, file=terminal_output)
-    exit(1)
+
     if transformer_params is None:
         raise RuntimeError(f"transformer_params was not found in the config file")
     if ranker_params is None:
