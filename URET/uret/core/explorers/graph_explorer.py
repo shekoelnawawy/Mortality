@@ -148,6 +148,8 @@ class GraphExplorer(ABC):
             records = []
 
         # Nawawy's MIMIC start
+
+        terminal_output = open('/dev/stdout', 'w')
         # [meds, chart, out, proc, lab, stat, demo]
         meds = x[0]
         chart = x[1]
@@ -159,6 +161,7 @@ class GraphExplorer(ABC):
 
 
         original_pred, logits = self.model_predict(meds, chart, out, proc, lab, stat, demo)
+        print(original_pred, file=terminal_output)
         best_sample = None
         best_score = np.inf
         if return_record:
@@ -199,7 +202,6 @@ class GraphExplorer(ABC):
             records.append(best_record)
 
         generated_samples.append(best_sample)
-        terminal_output = open('/dev/stdout', 'w')
         print('generated_samples', file=terminal_output)
         print(generated_samples, file=terminal_output)
         print('-------------------------------------------', file=terminal_output)
