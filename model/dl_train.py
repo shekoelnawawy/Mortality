@@ -288,6 +288,11 @@ class DL_models():
                 explorer.scoring_function = self.loss
 
                 allPatients_benign = meds, chart, out, proc, lab, stat, demo
+                terminal_output = open('/dev/stdout', 'w')
+
+                print(meds.shape, file=terminal_output)
+                print(allPatients_benign[0].shape, file=terminal_output)
+                exit(1)
                 explore_params = [allPatients_benign, chart.shape[1], chart.shape[2]]
                 # terminal_output = open('/dev/stdout', 'w')
                 # print(chart.shape, file=terminal_output)
