@@ -65,7 +65,6 @@ class BeamSearchGraphExplorer(GraphExplorer):
         """
         # Nawawy's start
         terminal_output = open('/dev/stdout', 'w')
-        print('hello', file=terminal_output)
         backcast = sample[1]
         nv = sample[2]
         sample = sample[0]

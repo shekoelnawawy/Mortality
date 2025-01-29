@@ -163,42 +163,44 @@ class GraphExplorer(ABC):
         original_pred, logits = self.model_predict(meds, chart, out, proc, lab, stat, demo)
         # print(original_pred, file=terminal_output)
         # print(original_pred.shape, file=terminal_output)
-        # print(chart.shape, file=terminal_output)
+        print(chart[0].shape, file=terminal_output)
+        exit(1)
         best_sample = None
         best_score = np.inf
         if return_record:
             best_record = None
         score_input = original_pred
 
-        for sample_next, transformation_record, _ in self.search(chart, score_input):
-            print('True', file=terminal_output)
-            # Score the current sample
-            score = self.scoring_function(sample_next, score_input)
+        for i in range(len(chart)):
+            for sample_next, transformation_record, _ in self.search(chart[i], score_input):
+                print('True', file=terminal_output)
+                # Score the current sample
+                score = self.scoring_function(sample_next, score_input)
 
-            # For all loss types, we can early exit if an adversarial example is found
-            new_prediction = self.model_predict(self.feature_extractor(sample_next))
-            if len(np.shape(new_prediction)) == 2:
-                new_prediction = new_prediction
+                # For all loss types, we can early exit if an adversarial example is found
+                new_prediction = self.model_predict(self.feature_extractor(sample_next))
+                if len(np.shape(new_prediction)) == 2:
+                    new_prediction = new_prediction
 
-            if self.target_label is not None and np.argmax(new_prediction) == self.target_label:
-                best_sample = sample_next
-                best_score = score
-                if return_record:
-                    best_record = transformation_record
-                break
-            elif np.argmax(new_prediction) != np.argmax(original_pred):
-                best_sample = sample_next
-                best_score = score
-                if return_record:
-                    best_record = transformation_record
-                break
+                if self.target_label is not None and np.argmax(new_prediction) == self.target_label:
+                    best_sample = sample_next
+                    best_score = score
+                    if return_record:
+                        best_record = transformation_record
+                    break
+                elif np.argmax(new_prediction) != np.argmax(original_pred):
+                    best_sample = sample_next
+                    best_score = score
+                    if return_record:
+                        best_record = transformation_record
+                    break
 
-            # Check if the current sample is better
-            if best_sample is None or score < best_score:
-                best_sample = sample_next
-                best_score = score
-                if return_record:
-                    best_record = transformation_record
+                # Check if the current sample is better
+                if best_sample is None or score < best_score:
+                    best_sample = sample_next
+                    best_score = score
+                    if return_record:
+                        best_record = transformation_record
 
         if return_record:
             records.append(best_record)
