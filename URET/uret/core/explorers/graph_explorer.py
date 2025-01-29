@@ -155,7 +155,7 @@ class GraphExplorer(ABC):
         nv = x[2]
         x = x[0]
         terminal_output = open('/dev/stdout', 'w')
-        print(x.shape, file=terminal_output)
+        print(x[0].shape, file=terminal_output)
         exit(1)
 
         original_pred, logits = self.model_predict(x[0], x[1], x[2], x[2], x[3], x[4], x[5])
