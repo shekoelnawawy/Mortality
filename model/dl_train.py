@@ -109,7 +109,7 @@ class DL_models():
             for i in range(self.k_fold):
                 print("==================={0:2d} FOLD=====================".format(i))
                 test_hids = list(k_hids[i])
-                self.model_test(test_hids, adversary=False)
+                self.model_test(test_hids, adversary=True)
             # Nawawy's MIMIC end
 
         
@@ -287,32 +287,14 @@ class DL_models():
                 explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
                 explorer.scoring_function = self.loss
 
-                explore_params = [meds, chart, out, proc, lab, stat, demo]
+                explore_params = chart
                 terminal_output = open('/dev/stdout', 'w')
-                print('meds')
-                print(meds.shape, file=terminal_output)
-                print('--------------------------------------')
                 print('chart')
                 print(chart.shape, file=terminal_output)
                 print('--------------------------------------')
-                print('out')
-                print(out.shape, file=terminal_output)
-                print('--------------------------------------')
-                print('proc')
-                print(proc.shape, file=terminal_output)
-                print('--------------------------------------')
-                print('lab')
-                print(lab.shape, file=terminal_output)
-                print('--------------------------------------')
-                print('stat')
-                print(stat.shape, file=terminal_output)
-                print('--------------------------------------')
-                print('demo')
-                print(demo.shape, file=terminal_output)
-                print('--------------------------------------')
-                exit(1)
-                explorer.explore(explore_params)
 
+                explorer.explore(explore_params)
+                exit(1)
 
                 allPatients_adversarial = np.array(explorer.explore(explore_params))
 
@@ -339,7 +321,6 @@ class DL_models():
 
             output,logits = self.net(meds,chart,out,proc,lab,stat,demo)
 #             self.model_interpret([meds,chart,out,proc,lab,stat,demo])
-            exit(1)
             output=output.squeeze()
             logits=logits.squeeze()
 #             print(demo.shape)

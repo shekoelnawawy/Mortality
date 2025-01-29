@@ -12,7 +12,7 @@ ranker_params:
 transformer_params:
     - data_type: "number"
       feature_index:
-          - 0  #glucose (t-12)
+          - 0  #heart rate 220045
       init_args:
           number_type: "int"
           input_constraints: #{"bounds": {"lower":40, "upper":400, "method":0"}}
