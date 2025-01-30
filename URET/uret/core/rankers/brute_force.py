@@ -25,7 +25,10 @@ class BruteForce(RankingAlgorithm):
         terminal_output = open('/dev/stdout', 'w')
         backcast = sample[1]
         nv = sample[2]
-        sample = sample[0]
+        original_sample = sample[0]
+        sample = sample[0][1]
+        print(sample.shape, file=terminal_output)
+        exit(1)
     # Nawawy's end
 
         # Create transformation record
