@@ -151,18 +151,12 @@ class GraphExplorer(ABC):
         backcast = x[1]
         nv = x[2]
         x = x[0]
-        print(np.array(x[0]).shape, file=terminal_output)
-        print(np.array(x[1]).shape, file=terminal_output)
-        print(np.array(x[2]).shape, file=terminal_output)
-        print(np.array(x[3]).shape, file=terminal_output)
-        print(np.array(x[4]).shape, file=terminal_output)
-        print(np.array(x[5]).shape, file=terminal_output)
-        print(np.array(x[6]).shape, file=terminal_output)
+
     # for i in range(len(x[0])):
     #     sample = x[0][i], x[1][i], x[2][i], x[3][i], x[4], x[5][i], x[6][i]
         sample = x[0], x[1], x[2], x[3], x[4], x[5], x[6]
-
-        original_pred, logits = self.model_predict(x[0], x[1], x[2], x[3], x[4], x[5], x[6])
+        # print(sample.shape)
+        original_pred, logits = self.model_predict(sample[0], sample[1], sample[2], sample[3], sample[4], sample[5], sample[6])
     # Nawawy's MIMIC end
         if len(np.shape(original_pred)) == 2:
             original_pred = original_pred[0]
