@@ -165,7 +165,7 @@ class GraphExplorer(ABC):
             best_record = None
         score_input = original_pred
 
-        for sample_next, transformation_record, _ in self.search([x[0], x[1], x[2], x[2], x[3], x[4], x[5], backcast, nv], score_input):
+        for sample_next, transformation_record, _ in self.search([x, backcast, nv], score_input):
             print('True', file=terminal_output)
             # Score the current sample
             score = self.scoring_function(sample_next, score_input)
