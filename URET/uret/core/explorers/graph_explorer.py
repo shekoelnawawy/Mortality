@@ -155,17 +155,8 @@ class GraphExplorer(ABC):
         nv = x[2]
         x = x[0]
 
-        print(x[0][0], file=terminal_output)
-        print(x[1].shape, file=terminal_output)
-        print(x[2].shape, file=terminal_output)
-        print(x[3].shape, file=terminal_output)
-        print(x[4].shape, file=terminal_output)
-        print(x[5].shape, file=terminal_output)
-        print(x[6].shape, file=terminal_output)
-
-        print(len(x[0]), file=terminal_output)
         for i in range(len(x[0])):
-            sample = x[0][i], x[1][i], x[2][i], x[3][i], x[4][i], x[5][i], x[6][i]
+            sample = x[0][i], x[1][i], x[2][i], x[3][i], x[4], x[5][i], x[6][i]
             print(sample[0], file = terminal_output)
             print(sample[1], file=terminal_output)
             print(sample[2], file=terminal_output)
