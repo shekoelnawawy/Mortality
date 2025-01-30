@@ -157,17 +157,8 @@ class GraphExplorer(ABC):
 
         for i in range(len(x[0])):
             sample = x[0][i], x[1][i], x[2][i], x[3][i], x[4], x[5][i], x[6][i]
-            print(sample[0], file = terminal_output)
-            print(sample[1], file=terminal_output)
-            print(sample[2], file=terminal_output)
-            print(sample[3], file=terminal_output)
-            print(sample[4], file=terminal_output)
-            print(sample[5], file=terminal_output)
-            print(sample[6], file=terminal_output)
-            exit(1)
-        for i, sample in enumerate(tqdm.tqdm(x)):
-            print(sample.shape, file=terminal_output)
-            original_pred, logits = self.model_predict(meds[i].unsqueeze(0), chart[i].unsqueeze(0), out[i].unsqueeze(0), proc[i].unsqueeze(0), lab, stat[i].unsqueeze(0), demo[i].unsqueeze(0))
+
+            original_pred, logits = self.model_predict(x[0], x[1], x[2], x[3], x[4], x[5], x[6])
             if len(np.shape(original_pred)) == 2:
                 original_pred = original_pred[0]
 
