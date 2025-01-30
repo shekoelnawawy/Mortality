@@ -135,7 +135,6 @@ class GraphExplorer(ABC):
         param target_features: If using feature loss, then this value contains the target features.
         param return_record: A boolean that if True will return the transformation record as well.
         """
-
         if self.scoring_alg == "feature_loss":
             if target_features is None:
                 raise ValueError("The target features must be provided in order to use feature_loss")
@@ -146,9 +145,7 @@ class GraphExplorer(ABC):
 
         if return_record:
             records = []
-
         # Nawawy's MIMIC start
-
         terminal_output = open('/dev/stdout', 'w')
         # [meds, chart, out, proc, lab, stat, demo]
         backcast = x[1]
@@ -159,6 +156,7 @@ class GraphExplorer(ABC):
             sample = x[0][i], x[1][i], x[2][i], x[3][i], x[4], x[5][i], x[6][i]
 
             original_pred, logits = self.model_predict(x[0], x[1], x[2], x[3], x[4], x[5], x[6])
+        # Nawawy's MIMIC end
             if len(np.shape(original_pred)) == 2:
                 original_pred = original_pred[0]
 
@@ -171,62 +169,58 @@ class GraphExplorer(ABC):
                 score_input = original_pred
             else:
                 score_input = target_features[i]
-
+            print('I am here', file=terminal_output)
             # for sample_next, transformation_record, _ in self.search(sample, score_input):
 
+        # original_pred, logits = self.model_predict(x[0], x[1], x[2], x[3], x[4], x[5], x[6])
+        # # print(original_pred, file=terminal_output)
+        # # print(original_pred.shape, file=terminal_output)
+        # # print(chart.shape, file=terminal_output)
+        # best_sample = None
+        # best_score = np.inf
+        # if return_record:
+        #     best_record = None
+        # score_input = original_pred
 
-        original_pred, logits = self.model_predict(x[0], x[1], x[2], x[3], x[4], x[5], x[6])
-        # print(original_pred, file=terminal_output)
-        # print(original_pred.shape, file=terminal_output)
-        # print(chart.shape, file=terminal_output)
-        best_sample = None
-        best_score = np.inf
-        if return_record:
-            best_record = None
-        score_input = original_pred
+            for sample_next, transformation_record, _ in self.search([sample, backcast, nv], score_input):
+                print('True', file=terminal_output)
+                # Score the current sample
+                score = self.scoring_function(sample_next, score_input)
 
+                # For all loss types, we can early exit if an adversarial example is found
+                new_prediction = self.model_predict(self.feature_extractor(sample_next))
+                if len(np.shape(new_prediction)) == 2:
+                    new_prediction = new_prediction
 
+                if self.target_label is not None and np.argmax(new_prediction) == self.target_label:
+                    best_sample = sample_next
+                    best_score = score
+                    if return_record:
+                        best_record = transformation_record
+                    break
+                elif np.argmax(new_prediction) != np.argmax(original_pred):
+                    best_sample = sample_next
+                    best_score = score
+                    if return_record:
+                        best_record = transformation_record
+                    break
 
+                # Check if the current sample is better
+                if best_sample is None or score < best_score:
+                    best_sample = sample_next
+                    best_score = score
+                    if return_record:
+                        best_record = transformation_record
 
-        for sample_next, transformation_record, _ in self.search([x, backcast, nv], score_input):
-            print('True', file=terminal_output)
-            # Score the current sample
-            score = self.scoring_function(sample_next, score_input)
+            if return_record:
+                records.append(best_record)
 
-            # For all loss types, we can early exit if an adversarial example is found
-            new_prediction = self.model_predict(self.feature_extractor(sample_next))
-            if len(np.shape(new_prediction)) == 2:
-                new_prediction = new_prediction
-
-            if self.target_label is not None and np.argmax(new_prediction) == self.target_label:
-                best_sample = sample_next
-                best_score = score
-                if return_record:
-                    best_record = transformation_record
-                break
-            elif np.argmax(new_prediction) != np.argmax(original_pred):
-                best_sample = sample_next
-                best_score = score
-                if return_record:
-                    best_record = transformation_record
-                break
-
-            # Check if the current sample is better
-            if best_sample is None or score < best_score:
-                best_sample = sample_next
-                best_score = score
-                if return_record:
-                    best_record = transformation_record
-
-        if return_record:
-            records.append(best_record)
-
-        generated_samples.append(best_sample)
-        print('generated_samples', file=terminal_output)
-        print(generated_samples, file=terminal_output)
-        print('-------------------------------------------', file=terminal_output)
-        # Nawawy's MIMIC end
-        exit(1)
+            generated_samples.append(best_sample)
+            print('generated_samples', file=terminal_output)
+            print(generated_samples, file=terminal_output)
+            print('-------------------------------------------', file=terminal_output)
+            # Nawawy's MIMIC end
+            exit(1)
         for i, sample in enumerate(tqdm.tqdm(x)):
             original_pred, logits = self.model_predict(meds[i].unsqueeze(0), chart[i].unsqueeze(0), out[i].unsqueeze(0), proc[i].unsqueeze(0), lab, stat[i].unsqueeze(0), demo[i].unsqueeze(0))
             if len(np.shape(original_pred)) == 2:
