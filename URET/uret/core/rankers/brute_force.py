@@ -27,8 +27,7 @@ class BruteForce(RankingAlgorithm):
         nv = sample[2]
         original_sample = sample[0]
         sample = sample[0][1]
-        print(sample.shape, file=terminal_output)
-        exit(1)
+
     # Nawawy's end
 
         # Create transformation record

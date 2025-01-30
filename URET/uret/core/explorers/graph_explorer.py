@@ -155,6 +155,24 @@ class GraphExplorer(ABC):
         nv = x[2]
         x = x[0]
 
+        for i, sample in enumerate(tqdm.tqdm(x)):
+            original_pred, logits = self.model_predict(meds[i].unsqueeze(0), chart[i].unsqueeze(0), out[i].unsqueeze(0), proc[i].unsqueeze(0), lab, stat[i].unsqueeze(0), demo[i].unsqueeze(0))
+            if len(np.shape(original_pred)) == 2:
+                original_pred = original_pred[0]
+
+            best_sample = None
+            best_score = np.inf
+            if return_record:
+                best_record = None
+
+            if self.scoring_alg == "model_loss":
+                score_input = original_pred
+            else:
+                score_input = target_features[i]
+
+            # for sample_next, transformation_record, _ in self.search(sample, score_input):
+
+
         original_pred, logits = self.model_predict(x[0], x[1], x[2], x[3], x[4], x[5], x[6])
         # print(original_pred, file=terminal_output)
         # print(original_pred.shape, file=terminal_output)
@@ -164,6 +182,9 @@ class GraphExplorer(ABC):
         if return_record:
             best_record = None
         score_input = original_pred
+
+
+
 
         for sample_next, transformation_record, _ in self.search([x, backcast, nv], score_input):
             print('True', file=terminal_output)
