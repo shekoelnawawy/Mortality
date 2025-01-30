@@ -155,7 +155,7 @@ class GraphExplorer(ABC):
     # for i in range(len(x[0])):
     #     sample = x[0][i], x[1][i], x[2][i], x[3][i], x[4], x[5][i], x[6][i]
         sample = x[0], x[1], x[2], x[3], x[4], x[5], x[6]
-        # print(sample.shape)
+
         original_pred, logits = self.model_predict(sample[0], sample[1], sample[2], sample[3], sample[4], sample[5], sample[6])
     # Nawawy's MIMIC end
         if len(np.shape(original_pred)) == 2:
@@ -171,8 +171,8 @@ class GraphExplorer(ABC):
         else:
             score_input = target_features
         # Nawawy's MIMIC start
-        print(np.array(sample).shape, file=terminal_output)
-        sample = np.array(sample).reshape(backcast*nv)
+        print(np.array(sample[1]).shape, file=terminal_output)
+        sample = np.array(sample[1]).reshape(backcast*nv)
         print(sample.shape, file=terminal_output)
         exit(1)
         # Nawawy's MIMIC end
