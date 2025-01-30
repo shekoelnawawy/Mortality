@@ -155,7 +155,7 @@ class GraphExplorer(ABC):
         nv = x[2]
         x = x[0]
 
-        print(x[0].shape, file=terminal_output)
+        print(x[0][0].shape, file=terminal_output)
         print(x[1].shape, file=terminal_output)
         print(x[2].shape, file=terminal_output)
         print(x[3].shape, file=terminal_output)
