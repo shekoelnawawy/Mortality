@@ -72,8 +72,6 @@ class BeamSearchGraphExplorer(GraphExplorer):
         sample = sample[0]
         # Nawawy's end
 
-        print(sample[0].shape, file=terminal_output)
-
         if depth >= self.max_depth:
             return
         if depth == 0:

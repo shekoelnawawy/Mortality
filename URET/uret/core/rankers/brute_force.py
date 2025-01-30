@@ -22,6 +22,7 @@ class BruteForce(RankingAlgorithm):
     # Nawawy's start
     def rank_edges(self, sample, scoring_function, score_input, model_predict, feature_extractor, dependencies=[],
                    current_transformation_records=None):
+        terminal_output = open('/dev/stdout', 'w')
         backcast = sample[1]
         nv = sample[2]
         sample = sample[0]
@@ -35,6 +36,8 @@ class BruteForce(RankingAlgorithm):
         # transformation_record of the transformed sample, score)
 
         for transformer_index, (transformer, input_index) in enumerate(self.transformer_list):
+            print('input_index', file=terminal_output)
+            print(input_index, file=terminal_output)
             if self.multi_feature_input:
                 possible_actions = transformer.get_possible(
                     sample[input_index], transformation_record=current_transformation_records[transformer_index]
