@@ -66,15 +66,6 @@ class BeamSearchGraphExplorer(GraphExplorer):
         # Nawawy's start
         terminal_output = open('/dev/stdout', 'w')
         # [meds, chart, out, proc, lab, stat, demo]
-        meds = x[0]
-        chart = x[1]
-        out = x[2]
-        proc = x[3]
-        lab = x[4]
-        stat = x[5]
-        demo = x[6]
-        backcast = x[7]
-        nv = x[8]
 
         backcast = sample[1]
         nv = sample[2]

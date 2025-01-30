@@ -164,8 +164,7 @@ class GraphExplorer(ABC):
         if return_record:
             best_record = None
         score_input = original_pred
-        print(original_pred, file=terminal_output)
-        exit(1)
+
         for sample_next, transformation_record, _ in self.search([x[0], x[1], x[2], x[2], x[3], x[4], x[5], backcast, nv], score_input):
             print('True', file=terminal_output)
             # Score the current sample
@@ -200,8 +199,8 @@ class GraphExplorer(ABC):
             records.append(best_record)
 
         generated_samples.append(best_sample)
-        # print('generated_samples', file=terminal_output)
-        # print(generated_samples, file=terminal_output)
+        print('generated_samples', file=terminal_output)
+        print(generated_samples, file=terminal_output)
         print('-------------------------------------------', file=terminal_output)
         # Nawawy's MIMIC end
         exit(1)
