@@ -162,7 +162,7 @@ class GraphExplorer(ABC):
     #     sample = x[0][i], x[1][i], x[2][i], x[3][i], x[4], x[5][i], x[6][i]
         sample = x[0], x[1], x[2], x[3], x[4], x[5], x[6]
 
-        original_pred, logits = self.model_predict(sample)
+        original_pred, logits = self.model_predict(x[0], x[1], x[2], x[3], x[4], x[5], x[6])
     # Nawawy's MIMIC end
         if len(np.shape(original_pred)) == 2:
             original_pred = original_pred[0]
