@@ -151,7 +151,13 @@ class GraphExplorer(ABC):
         backcast = x[1]
         nv = x[2]
         x = x[0]
-
+        print(np.array(x[0]).shape, file=terminal_output)
+        print(np.array(x[1]).shape, file=terminal_output)
+        print(np.array(x[2]).shape, file=terminal_output)
+        print(np.array(x[3]).shape, file=terminal_output)
+        print(np.array(x[4]).shape, file=terminal_output)
+        print(np.array(x[5]).shape, file=terminal_output)
+        print(np.array(x[6]).shape, file=terminal_output)
     # for i in range(len(x[0])):
     #     sample = x[0][i], x[1][i], x[2][i], x[3][i], x[4], x[5][i], x[6][i]
         sample = x[0], x[1], x[2], x[3], x[4], x[5], x[6]
