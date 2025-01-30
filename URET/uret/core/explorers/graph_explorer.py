@@ -163,7 +163,7 @@ class GraphExplorer(ABC):
         print(x[5].shape, file=terminal_output)
         print(x[6].shape, file=terminal_output)
 
-
+        print(len(x[0]), file=terminal_output)
         for i in range(len(x[0])):
             sample = x[0][i], x[1][i], x[2][i], x[3][i], x[4][i], x[5][i], x[6][i]
             print(sample[0], file = terminal_output)
