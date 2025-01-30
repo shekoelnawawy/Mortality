@@ -172,7 +172,7 @@ class GraphExplorer(ABC):
             score_input = target_features
         # Nawawy's MIMIC start
         print(np.array(sample[1]).shape, file=terminal_output)
-        sample = np.array(sample[1]).reshape(backcast*nv)
+        sample = np.array(sample[1]).reshape(200,backcast*nv)
         print(sample.shape, file=terminal_output)
         exit(1)
         # Nawawy's MIMIC end
