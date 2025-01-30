@@ -169,18 +169,12 @@ class GraphExplorer(ABC):
                 score_input = original_pred
             else:
                 score_input = target_features[i]
-            print('I am here', file=terminal_output)
-            # for sample_next, transformation_record, _ in self.search(sample, score_input):
-
-        # original_pred, logits = self.model_predict(x[0], x[1], x[2], x[3], x[4], x[5], x[6])
-        # # print(original_pred, file=terminal_output)
-        # # print(original_pred.shape, file=terminal_output)
-        # # print(chart.shape, file=terminal_output)
-        # best_sample = None
-        # best_score = np.inf
-        # if return_record:
-        #     best_record = None
-        # score_input = original_pred
+            # Nawawy's MIMIC start
+            print(sample.shape, file=terminal_output)
+            sample = sample.reshape(backcast*nv)
+            print(sample.shape, file=terminal_output)
+            exit(1)
+            # Nawawy's MIMIC end
 
             for sample_next, transformation_record, _ in self.search([sample, backcast, nv], score_input):
                 print('True', file=terminal_output)
