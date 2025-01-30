@@ -1,8 +1,9 @@
 from uret.core.rankers.ranking_algorithm import RankingAlgorithm
 import warnings
 import copy
+# Nawawy's MIMIC start
 import numpy as np
-
+# Nawawy's MIMIC end
 class BruteForce(RankingAlgorithm):
     """
     This implementation tries all transformations and parameters for each given sample,
@@ -28,7 +29,7 @@ class BruteForce(RankingAlgorithm):
         # Nawawy's MIMIC start
         original_sample = sample[0]
         sample = sample[0][1]
-        print(np.array(sample).shape, file=terminal_output)
+        sample = np.array(sample).reshape(len(sample)*backcast*nv)
         # Nawawy's MIMIC end
     # Nawawy's end
 
@@ -40,8 +41,6 @@ class BruteForce(RankingAlgorithm):
         # transformation_record of the transformed sample, score)
 
         for transformer_index, (transformer, input_index) in enumerate(self.transformer_list):
-            print('input_index', file=terminal_output)
-            print(input_index, file=terminal_output)
             if self.multi_feature_input:
                 possible_actions = transformer.get_possible(
                     sample[input_index], transformation_record=current_transformation_records[transformer_index]
