@@ -170,12 +170,6 @@ class GraphExplorer(ABC):
             score_input = original_pred
         else:
             score_input = target_features
-        # Nawawy's MIMIC start
-        print(np.array(sample[1]).shape, file=terminal_output)
-        sample = np.array(sample[1]).reshape(200,backcast*nv)
-        print(sample.shape, file=terminal_output)
-        exit(1)
-        # Nawawy's MIMIC end
 
         for sample_next, transformation_record, _ in self.search([sample, backcast, nv], score_input):
             print('True', file=terminal_output)

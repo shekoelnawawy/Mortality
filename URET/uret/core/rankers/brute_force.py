@@ -1,7 +1,7 @@
 from uret.core.rankers.ranking_algorithm import RankingAlgorithm
 import warnings
 import copy
-
+import numpy as np
 
 class BruteForce(RankingAlgorithm):
     """
@@ -25,9 +25,11 @@ class BruteForce(RankingAlgorithm):
         terminal_output = open('/dev/stdout', 'w')
         backcast = sample[1]
         nv = sample[2]
+        # Nawawy's MIMIC start
         original_sample = sample[0]
         sample = sample[0][1]
-
+        print(np.array(sample).shape, file=terminal_output)
+        # Nawawy's MIMIC end
     # Nawawy's end
 
         # Create transformation record
