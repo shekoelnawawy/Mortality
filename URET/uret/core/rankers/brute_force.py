@@ -41,12 +41,13 @@ class BruteForce(RankingAlgorithm):
         # transformation_record of the transformed sample, score)
 
         for transformer_index, (transformer, input_index) in enumerate(self.transformer_list):
-            print('I am here', file=terminal_output)
-            exit(1)
             if self.multi_feature_input:
                 possible_actions = transformer.get_possible(
                     sample[input_index], transformation_record=current_transformation_records[transformer_index]
                 )
+                print('I am here', file=terminal_output)
+                print(possible_actions, file=terminal_output)
+                exit(1)
             else:
                 possible_actions = transformer.get_possible(
                     sample, transformation_record=current_transformation_records
