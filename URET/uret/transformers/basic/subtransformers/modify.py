@@ -106,15 +106,9 @@ class Modify(SubTransformer):
             elif self.number_type == "float":
                 increment_values = np.geomspace(low, high, self.action_samples, endpoint=False)
 
-        print('increment_values', file=terminal_output)
-        print(increment_values, file=terminal_output)
-        print('-----------------------------------------------', file=terminal_output)
         increment_values = np.array(
             list(set(increment_values))
         )  # remove duplicates. This can be from geomspace with ints usually
-        print('increment_values', file=terminal_output)
-        print(increment_values, file=terminal_output)
-        print('-----------------------------------------------', file=terminal_output)
         increment_values = np.delete(increment_values, increment_values == 0)  # remove 0's
         print('increment_values', file=terminal_output)
         print(increment_values, file=terminal_output)
