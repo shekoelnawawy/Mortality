@@ -156,7 +156,10 @@ class Transformer(ABC):
         possible, action_args = self._is_possible(
             x, transformation_record=transformation_record, transformation_value=transformation_value
         )
-
+        terminal_output = open('/dev/stdout', 'w')
+        print('possible', file=terminal_output)
+        print(possible, file=terminal_output)
+        print('-----------------------------------------------', file=terminal_output)
         if not possible:
             return False, []
 
