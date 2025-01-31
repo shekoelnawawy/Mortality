@@ -144,9 +144,7 @@ class NumberTransformer(Transformer):
         :param transformation_value: The definition of the transformation to apply
         :return: True if possible, arguments to use for transform()
         """
-        terminal_output = open('/dev/stdout', 'w')
-        print('I am here2', file=terminal_output)
-        print('-----------------------------------------------', file=terminal_output)
+
         if transformation_value is None:
             return False, []  # Can't verify default actions
 
