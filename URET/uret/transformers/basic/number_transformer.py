@@ -149,16 +149,16 @@ class NumberTransformer(Transformer):
         :param transformation_value: The definition of the transformation to apply
         :return: True if possible, arguments to use for transform()
         """
-        terminal_output = open('/dev/stdout', 'w')
-        print('transformation_value', file=terminal_output)
-        print(transformation_value, file=terminal_output)
+
         if transformation_value is None:
             return False, []  # Can't verify default actions
 
         possible, action_args, transformation_effect = self.subtransformer_list[transformation_value[0]].is_possible(
             x, *transformation_value[1:]
         )
-
+        terminal_output = open('/dev/stdout', 'w')
+        print('possible', file=terminal_output)
+        print(possible, file=terminal_output)
         if not possible:
             return False, []
 
