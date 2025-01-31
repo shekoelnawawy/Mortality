@@ -182,6 +182,10 @@ class Transformer(ABC):
         action_list = []
         for i, subtransformer in enumerate(self.subtransformer_list):
             subtransformer_actions = subtransformer.get_possible(x)
+            terminal_output = open('/dev/stdout', 'w')
+            print('subtransformer_actions', file=terminal_output)
+            print(subtransformer_actions, file=terminal_output)
+            print('-----------------------------------------------', file=terminal_output)
             for action in subtransformer_actions:
                 possible, action_args = self.is_possible(
                     x, transformation_record=transformation_record, transformation_value=[i, action]

@@ -81,7 +81,6 @@ class Modify(SubTransformer):
         """
         
         #sample_num = int(self.action_samples / 2)  # We divide by two cause we will be using pos and negative values
-        terminal_output = open('/dev/stdout', 'w')
 
         low = self.low
         high = self.high
@@ -110,9 +109,6 @@ class Modify(SubTransformer):
             list(set(increment_values))
         )  # remove duplicates. This can be from geomspace with ints usually
         increment_values = np.delete(increment_values, increment_values == 0)  # remove 0's
-        print('increment_values', file=terminal_output)
-        print(increment_values, file=terminal_output)
-        print('-----------------------------------------------', file=terminal_output)
         # increment_values = np.concatenate((-1 * increment_values, increment_values))  # Use positive and negative values
 
         return increment_values
@@ -137,9 +133,5 @@ class Modify(SubTransformer):
 
         :return: A list of transformation values
         """
-        temp = self.get_action_list()
-        terminal_output = open('/dev/stdout', 'w')
-        print('temp', file=terminal_output)
-        print(temp, file=terminal_output)
-        print('-----------------------------------------------', file=terminal_output)
-        return temp#self.get_action_list()
+
+        return self.get_action_list()
