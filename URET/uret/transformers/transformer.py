@@ -153,8 +153,8 @@ class Transformer(ABC):
 
         transformation_index = transformation_value[0]
         terminal_output = open('/dev/stdout', 'w')
-        print('transformation_value[0]', file=terminal_output)
-        print(transformation_value[0], file=terminal_output)
+        print('transformation_value[1]', file=terminal_output)
+        print(transformation_value[1], file=terminal_output)
         print('-----------------------------------------------', file=terminal_output)
         possible, action_args = self._is_possible(
             x, transformation_record=transformation_record, transformation_value=transformation_value
