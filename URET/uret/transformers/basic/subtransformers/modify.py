@@ -85,13 +85,13 @@ class Modify(SubTransformer):
 
         low = self.low
         high = self.high
-        print('self.sample_method', file=terminal_output)
-        print(self.sample_method, file=terminal_output)
-        print('---------------------------------------------------')
 
         if self.sample_method == "random":
             if self.number_type == "int":
                 increment_values = np.random.randint(low, high, self.action_samples)
+                print('increment_values', file=terminal_output)
+                print(increment_values, file=terminal_output)
+                print('-----------------------------------------------', file=terminal_output)
             elif self.number_type == "float":
                 increment_values = np.random.uniform(low, high, self.action_samples)
 
