@@ -137,5 +137,9 @@ class Modify(SubTransformer):
 
         :return: A list of transformation values
         """
-
-        return self.get_action_list()
+        temp = self.get_action_list()
+        terminal_output = open('/dev/stdout', 'w')
+        print('temp', file=terminal_output)
+        print(temp, file=terminal_output)
+        print('-----------------------------------------------', file=terminal_output)
+        return temp#self.get_action_list()
