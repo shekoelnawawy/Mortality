@@ -85,14 +85,9 @@ class Modify(SubTransformer):
 
         low = self.low
         high = self.high
-
-        print('low', file=terminal_output)
-        print(low, file=terminal_output)
-        print('--------------------------------------', file=terminal_output)
-
-        print('high', file=terminal_output)
-        print(high, file=terminal_output)
-        print('--------------------------------------', file=terminal_output)
+        print('self.sample_method', file=terminal_output)
+        print(self.sample_method, file=terminal_output)
+        print('---------------------------------------------------')
 
         if self.sample_method == "random":
             if self.number_type == "int":
