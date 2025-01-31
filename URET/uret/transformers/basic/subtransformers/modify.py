@@ -81,7 +81,8 @@ class Modify(SubTransformer):
         """
         
         #sample_num = int(self.action_samples / 2)  # We divide by two cause we will be using pos and negative values
-
+        terminal_output = open('/dev/stdout', 'w')
+        print('I am here', file=terminal_output)
         low = self.low
         high = self.high
 
