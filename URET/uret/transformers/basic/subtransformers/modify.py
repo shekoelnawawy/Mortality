@@ -82,9 +82,17 @@ class Modify(SubTransformer):
         
         #sample_num = int(self.action_samples / 2)  # We divide by two cause we will be using pos and negative values
         terminal_output = open('/dev/stdout', 'w')
-        print('I am here', file=terminal_output)
+
         low = self.low
         high = self.high
+
+        print('low', file=terminal_output)
+        print(low, file=terminal_output)
+        print('--------------------------------------', file=terminal_output)
+
+        print('high', file=terminal_output)
+        print(high, file=terminal_output)
+        print('--------------------------------------', file=terminal_output)
 
         if self.sample_method == "random":
             if self.number_type == "int":
