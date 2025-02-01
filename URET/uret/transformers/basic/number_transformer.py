@@ -207,8 +207,6 @@ class NumberTransformer(Transformer):
             # Nawawy's start
             if (transformation_effect > 0 and np.greater_equal(x, upper_bound).all()) or (transformation_effect < 0 and np.less_equal(x, lower_bound).all()):
             # Nawawy's end
-                terminal_output = open('/dev/stdout', 'w')
-                print('I am here', file=terminal_output)
                 return False, []
 
         return True, action_args
