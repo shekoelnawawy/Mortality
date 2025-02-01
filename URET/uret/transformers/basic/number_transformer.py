@@ -156,7 +156,9 @@ class NumberTransformer(Transformer):
         possible, action_args, transformation_effect = self.subtransformer_list[transformation_value[0]].is_possible(
             x, *transformation_value[1:]
         )
-
+        terminal_output = open('/dev/stdout', 'w')
+        print('transformation_effect', file=terminal_output)
+        print(transformation_effect, file=terminal_output)
         if not possible:
             return False, []
 
