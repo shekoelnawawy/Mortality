@@ -156,9 +156,7 @@ class NumberTransformer(Transformer):
         possible, action_args, transformation_effect = self.subtransformer_list[transformation_value[0]].is_possible(
             x, *transformation_value[1:]
         )
-        terminal_output = open('/dev/stdout', 'w')
-        print('transformation_effect', file=terminal_output)
-        print(transformation_effect, file=terminal_output)
+
         if not possible:
             return False, []
 
@@ -207,7 +205,7 @@ class NumberTransformer(Transformer):
                     upper_bound = max(upper_bound, self.input_constraints["bounds"].get("upper"))
                 
             # Nawawy's start
-            if (transformation_effect > 0 and np.greater_equal(x, upper_bound).any()) or (transformation_effect < 0 and np.less_equal(x, lower_bound).any()):
+            if (transformation_effect > 0 and np.greater_equal(x, upper_bound).all()) or (transformation_effect < 0 and np.less_equal(x, lower_bound).all()):
             # Nawawy's end
                 terminal_output = open('/dev/stdout', 'w')
                 print('I am here', file=terminal_output)
