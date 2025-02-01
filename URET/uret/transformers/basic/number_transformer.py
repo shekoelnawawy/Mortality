@@ -162,10 +162,6 @@ class NumberTransformer(Transformer):
 
         # Validates the action with respect to the input constraints
         original_value = x - transformation_record
-        terminal_output = open('/dev/stdout', 'w')
-        print('original_value', file=terminal_output)
-        print(original_value, file=terminal_output)
-
         # Action is invalid if the transformation record is at an eps boundary and the action's effect would move past it
         if "eps" in self.input_constraints:
             # Absolute clipping - Clip based on a flat amount from the original value.
@@ -211,6 +207,8 @@ class NumberTransformer(Transformer):
             # Nawawy's start
             if (transformation_effect > 0 and np.greater_equal(x, upper_bound).any()) or (transformation_effect < 0 and np.less_equal(x, lower_bound).any()):
             # Nawawy's end
+                terminal_output = open('/dev/stdout', 'w')
+                print('I am here', file=terminal_output)
                 return False, []
 
         return True, action_args
