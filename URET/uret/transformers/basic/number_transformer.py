@@ -156,14 +156,16 @@ class NumberTransformer(Transformer):
         possible, action_args, transformation_effect = self.subtransformer_list[transformation_value[0]].is_possible(
             x, *transformation_value[1:]
         )
-        terminal_output = open('/dev/stdout', 'w')
-        print('possible', file=terminal_output)
-        print(possible, file=terminal_output)
+
         if not possible:
             return False, []
 
         # Validates the action with respect to the input constraints
         original_value = x - transformation_record
+        terminal_output = open('/dev/stdout', 'w')
+        print('original_value', file=terminal_output)
+        print(original_value, file=terminal_output)
+
         # Action is invalid if the transformation record is at an eps boundary and the action's effect would move past it
         if "eps" in self.input_constraints:
             # Absolute clipping - Clip based on a flat amount from the original value.
