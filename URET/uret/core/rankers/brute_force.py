@@ -73,9 +73,8 @@ class BruteForce(RankingAlgorithm):
 
                 # Nawawy's start
                 sample_temp = sample_temp.reshape(number_of_instances, backcast, nv)
-                new_prediction, logits = self.model_predict(sample_temp[0], sample_temp[1], sample_temp[2], sample_temp[3], sample_temp[4],
-                                                           sample_temp[5], sample_temp[6])
-                # new_prediction, _, _, _, _ = model_predict(feature_extractor(sample_temp))
+                # new_prediction, logits = self.model_predict(sample_temp[0], sample_temp[1], sample_temp[2], sample_temp[3], sample_temp[4], sample_temp[5], sample_temp[6])
+                new_prediction, _, _, _, _ = model_predict(feature_extractor(sample_temp))
                 score = scoring_function(new_prediction, score_input)
 
                 sample_temp = sample_temp.reshape(backcast * nv)
