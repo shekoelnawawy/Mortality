@@ -204,9 +204,9 @@ class NumberTransformer(Transformer):
                 if (method == 4 or method == 5) and self.input_constraints["bounds"].get("upper") is not None:
                     upper_bound = max(upper_bound, self.input_constraints["bounds"].get("upper"))
                 
-            # Nawawy's start
+            # Nawawy's MIMIC start
             if (transformation_effect > 0 and np.greater_equal(x, upper_bound).all()) or (transformation_effect < 0 and np.less_equal(x, lower_bound).all()):
-            # Nawawy's end
+            # Nawawy's MIMIC end
                 return False, []
 
         return True, action_args

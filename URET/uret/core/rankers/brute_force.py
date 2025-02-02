@@ -3,6 +3,7 @@ import warnings
 import copy
 # Nawawy's MIMIC start
 import numpy as np
+import torch
 # Nawawy's MIMIC end
 class BruteForce(RankingAlgorithm):
     """
@@ -74,7 +75,7 @@ class BruteForce(RankingAlgorithm):
 
                 # Nawawy's start
                 sample_temp = sample_temp.reshape(number_of_instances, backcast, nv)
-                new_prediction, logits = model_predict(sample_temp[0], sample_temp[1], sample_temp[2], sample_temp[3], sample_temp[4], sample_temp[5], sample_temp[6])
+                new_prediction, logits = model_predict(torch.from_numpy(sample_temp[0]), torch.from_numpy(sample_temp[1]), torch.from_numpy(sample_temp[2]), torch.from_numpy(sample_temp[3]), torch.from_numpy(sample_temp[4]), torch.from_numpy(sample_temp[5]), torch.from_numpy(sample_temp[6]))
                 # new_prediction, _, _, _, _ = model_predict(feature_extractor(sample_temp))
                 score = scoring_function(new_prediction, score_input)
 
