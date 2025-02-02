@@ -69,6 +69,9 @@ class BruteForce(RankingAlgorithm):
                     transformation_records_temp = new_transformation_record
 
                 sample_temp = self._enforce_dependencies(sample_temp, dependencies)
+                terminal_output = open('/dev/stdout', 'w')
+                print('sample_temp', file=terminal_output)
+                print(sample_temp, file=terminal_output)
                 # Nawawy's start
                 sample_temp = sample_temp.reshape(1, backcast, nv)
                 new_prediction, _, _, _, _ = model_predict(feature_extractor(sample_temp))
