@@ -68,6 +68,9 @@ class Modify(SubTransformer):
         else:
             new_value = transformation_value
 
+        terminal_output = open('/dev/stdout', 'w')
+        print('new_value', file=terminal_output)
+        print(new_value, file=terminal_output)
         new_x = np.full(len(x), new_value)
         new_x[(x >= self.low) & (x <= self.high)] = x[(x >= self.low) & (x <= self.high)]
         increment_value = new_x - x
