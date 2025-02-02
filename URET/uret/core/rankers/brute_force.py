@@ -45,9 +45,6 @@ class BruteForce(RankingAlgorithm):
                 possible_actions = transformer.get_possible(
                     sample[input_index], transformation_record=current_transformation_records[transformer_index]
                 )
-                print('possible_actions', file=terminal_output)
-                print(possible_actions, file=terminal_output)
-                exit(1)
             else:
                 possible_actions = transformer.get_possible(
                     sample, transformation_record=current_transformation_records
