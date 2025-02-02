@@ -29,7 +29,8 @@ class BruteForce(RankingAlgorithm):
         # Nawawy's MIMIC start
         original_sample = sample[0]
         sample = sample[0][1]
-        sample = np.array(sample).reshape(len(sample)*backcast*nv)
+        number_of_instances = len(sample)
+        sample = np.array(sample).reshape(number_of_instances*backcast*nv)
         # Nawawy's MIMIC end
     # Nawawy's end
 
@@ -69,11 +70,9 @@ class BruteForce(RankingAlgorithm):
                     transformation_records_temp = new_transformation_record
 
                 sample_temp = self._enforce_dependencies(sample_temp, dependencies)
-                terminal_output = open('/dev/stdout', 'w')
-                print('sample_temp', file=terminal_output)
-                print(sample_temp, file=terminal_output)
+
                 # Nawawy's start
-                sample_temp = sample_temp.reshape(1, backcast, nv)
+                sample_temp = sample_temp.reshape(number_of_instances, backcast, nv)
                 new_prediction, _, _, _, _ = model_predict(feature_extractor(sample_temp))
                 score = scoring_function(new_prediction, score_input)
 
