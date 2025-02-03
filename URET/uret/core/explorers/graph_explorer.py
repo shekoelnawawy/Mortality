@@ -157,14 +157,10 @@ class GraphExplorer(ABC):
         sample = x[0], x[1], x[2], x[3], x[4], x[5], x[6]
 
         original_pred, logits = self.model_predict(sample[0], sample[1], sample[2], sample[3], sample[4], sample[5], sample[6])
-    # Nawawy's MIMIC end
-        print('original_pred', file=terminal_output)
-        print(original_pred, file=terminal_output)
-        print('original_pred.shape', file=terminal_output)
-        print(original_pred.shape, file=terminal_output)
 
-        if len(np.shape(original_pred)) == 2:
-            original_pred = original_pred[0]
+        # if len(np.shape(original_pred)) == 2:
+        #     original_pred = original_pred[0]
+        # Nawawy's MIMIC end
 
         best_sample = None
         best_score = np.inf
