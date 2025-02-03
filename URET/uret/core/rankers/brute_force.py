@@ -93,9 +93,8 @@ class BruteForce(RankingAlgorithm):
                 test_truth.extend(score_input.data.cpu().numpy())
                 test_logits.extend(logits.data.cpu().numpy())
 
-                exit(1)
-
                 score = scoring_function(torch.tensor(test_prob), torch.tensor(test_truth), torch.tensor(test_logits), False, False)
+                exit(1)
 
                 sample_temp = sample_temp.reshape(backcast * nv)
                 # Nawawy's end
