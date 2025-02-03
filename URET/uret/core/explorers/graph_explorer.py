@@ -170,6 +170,10 @@ class GraphExplorer(ABC):
             score_input = original_pred
         else:
             score_input = target_features
+        print('score_input', file=terminal_output)
+        print(score_input, file=terminal_output)
+        print('score_input.shape', file=terminal_output)
+        print(score_input.shape, file=terminal_output)
 
         for sample_next, transformation_record, _ in self.search([sample, backcast, nv], score_input):
             print('True', file=terminal_output)
