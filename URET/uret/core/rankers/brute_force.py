@@ -87,9 +87,10 @@ class BruteForce(RankingAlgorithm):
                 print('new_prediction.shape', file=terminal_output)
                 print(new_prediction.shape, file=terminal_output)
 
+                exit(1)
 
                 score = scoring_function(new_prediction, score_input, logits)
-                exit(1)
+
                 sample_temp = sample_temp.reshape(backcast * nv)
                 # Nawawy's end
                 if self.multi_feature_input:

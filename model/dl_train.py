@@ -289,7 +289,7 @@ class DL_models():
 
                 allPatients_benign = meds, chart, out, proc, lab, stat, demo
 
-                explore_params = [allPatients_benign, chart.shape[1], chart.shape[2]]
+                explore_params = [allPatients_benign, chart.shape[1], chart.shape[2], y]
                 # terminal_output = open('/dev/stdout', 'w')
                 # print(chart.shape, file=terminal_output)
 

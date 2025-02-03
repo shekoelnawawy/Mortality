@@ -151,7 +151,7 @@ class GraphExplorer(ABC):
         backcast = x[1]
         nv = x[2]
         x = x[0]
-
+        y_truth = x[3]
     # for i in range(len(x[0])):
     #     sample = x[0][i], x[1][i], x[2][i], x[3][i], x[4], x[5][i], x[6][i]
         sample = x[0], x[1], x[2], x[3], x[4], x[5], x[6]
@@ -168,7 +168,7 @@ class GraphExplorer(ABC):
             best_record = None
 
         if self.scoring_alg == "model_loss":
-            score_input = original_pred
+            score_input = y_truth
         else:
             score_input = target_features
 
