@@ -86,10 +86,16 @@ class BruteForce(RankingAlgorithm):
                 print(score_input.shape, file=terminal_output)
                 print('new_prediction.shape', file=terminal_output)
                 print(new_prediction.shape, file=terminal_output)
+                test_prob=[]
+                test_logits=[]
+                test_truth=[]
+                test_prob.extend(new_prediction.data.cpu().numpy())
+                test_truth.extend(score_input.data.cpu().numpy())
+                test_logits.extend(logits.data.cpu().numpy())
 
                 exit(1)
 
-                score = scoring_function(new_prediction, score_input, logits)
+                score = scoring_function(torch.tensor(test_prob), torch.tensor(test_truth), torch.tensor(test_logits), False, False)
 
                 sample_temp = sample_temp.reshape(backcast * nv)
                 # Nawawy's end
