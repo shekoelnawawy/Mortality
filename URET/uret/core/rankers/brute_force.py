@@ -77,10 +77,19 @@ class BruteForce(RankingAlgorithm):
                 sample_temp = sample_temp.reshape(number_of_instances, backcast, nv)
                 new_prediction, logits = model_predict(original_sample[0], torch.from_numpy(sample_temp), original_sample[2], original_sample[3], original_sample[4], original_sample[5], original_sample[6])
                 # new_prediction, _, _, _, _ = model_predict(feature_extractor(sample_temp))
-                score = scoring_function(new_prediction, score_input)
-                print('score', file=terminal_output)
-                print(score, file=terminal_output)
+
+                print('score_input', file=terminal_output)
+                print(score_input, file=terminal_output)
+                print('new_prediction', file=terminal_output)
+                print(new_prediction, file=terminal_output)
+                print('score_input.shape', file=terminal_output)
+                print(score_input.shape, file=terminal_output)
+                print('new_prediction.shape', file=terminal_output)
+                print(new_prediction.shape, file=terminal_output)
                 exit(1)
+
+                score = scoring_function(new_prediction, score_input)
+
                 sample_temp = sample_temp.reshape(backcast * nv)
                 # Nawawy's end
                 if self.multi_feature_input:
