@@ -168,7 +168,9 @@ class GraphExplorer(ABC):
             best_record = None
 
         if self.scoring_alg == "model_loss":
+            # Nawawy's MIMIC start
             score_input = y_truth
+            # Nawawy's MIMIC end
         else:
             score_input = target_features
 
