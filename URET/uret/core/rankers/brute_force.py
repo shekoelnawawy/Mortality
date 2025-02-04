@@ -29,6 +29,7 @@ class BruteForce(RankingAlgorithm):
         nv = sample[2]
         # Nawawy's MIMIC start
         original_sample = sample[0]
+        print(original_sample.shape, file=terminal_output)
         sample = sample[0][1]
         number_of_instances = len(sample)
         sample = np.array(sample).reshape(number_of_instances*backcast*nv)
