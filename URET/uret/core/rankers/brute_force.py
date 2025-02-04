@@ -91,16 +91,12 @@ class BruteForce(RankingAlgorithm):
                 test_prob.extend(new_prediction.data.cpu().numpy())
                 test_truth.extend(score_input.data.cpu().numpy())
                 test_logits.extend(logits.data.cpu().numpy())
-                print('test_prob', file=terminal_output)
-                print(torch.tensor(test_prob).shape, file=terminal_output)
-                print('test_truth', file=terminal_output)
-                print(torch.tensor(test_truth).shape, file=terminal_output)
-                print('test_logits', file=terminal_output)
-                print(torch.tensor(test_logits).shape, file=terminal_output)
-                exit(1)
+
                 score = scoring_function(torch.tensor(test_prob), torch.tensor(test_truth), torch.tensor(test_logits), False, False)
 
-
+                print('score', file=terminal_output)
+                print(torch.tensor(score).shape, file=terminal_output)
+                exit(1)
                 sample_temp = sample_temp.reshape(backcast * nv)
                 # Nawawy's end
                 if self.multi_feature_input:
