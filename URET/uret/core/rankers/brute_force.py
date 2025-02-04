@@ -84,7 +84,7 @@ class BruteForce(RankingAlgorithm):
                 test_truth.extend(score_input.data.cpu().numpy())
                 test_logits.extend(logits.data.cpu().numpy())
 
-                score = scoring_function(torch.tensor(test_prob), torch.reshape(torch.tensor(test_truth), (len(torch.tensor(test_truth)),1)), torch.tensor(test_logits), False, False)
+                score = scoring_function(torch.tensor(test_prob), torch.reshape(torch.tensor(test_truth), (len(torch.tensor(test_truth)),1)), torch.tensor(test_logits), True, False)
 
                 print('score', file=terminal_output)
                 print(score, file=terminal_output)

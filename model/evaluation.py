@@ -90,10 +90,7 @@ class Loss(nn.Module):
         logits=logits.to(self.device)
         labels=labels.to(self.device)
         classify_loss2 = self.classify_loss2(logits, labels)
-        print('classify_loss', file=terminal_output)
-        print(classify_loss, file=terminal_output)
-        print(classify_loss.shape, file=terminal_output)
-        exit(1)
+
         if train:
             return classify_loss
         #################           AUROC            #######################
