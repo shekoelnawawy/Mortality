@@ -62,14 +62,17 @@ class Loss(nn.Module):
         prob=prob.type(torch.FloatTensor)
         labels=labels.type(torch.FloatTensor)
         logits=logits.type(torch.FloatTensor)
+
         print('prob', file=terminal_output)
+        print(prob, file=terminal_output)
         print(prob.shape, file=terminal_output)
-
         print('labels', file=terminal_output)
+        print(labels, file=terminal_output)
         print(labels.shape, file=terminal_output)
-
         print('logits', file=terminal_output)
+        print(logits, file=terminal_output)
         print(logits.shape, file=terminal_output)
+        exit(1)
 
         pos_ind = labels >= 0.5
         neg_ind = labels < 0.5
