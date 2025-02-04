@@ -63,16 +63,6 @@ class Loss(nn.Module):
         labels=labels.type(torch.FloatTensor)
         logits=logits.type(torch.FloatTensor)
 
-        print('prob', file=terminal_output)
-        print(prob, file=terminal_output)
-        print(prob.shape, file=terminal_output)
-        print('labels', file=terminal_output)
-        print(labels, file=terminal_output)
-        print(labels.shape, file=terminal_output)
-        print('logits', file=terminal_output)
-        print(logits, file=terminal_output)
-        print(logits.shape, file=terminal_output)
-        exit(1)
 
         pos_ind = labels >= 0.5
         neg_ind = labels < 0.5
@@ -82,6 +72,20 @@ class Loss(nn.Module):
         neg_prob = prob[neg_ind]
         pos_loss, neg_loss = 0, 0
 
+        print('pos_label', file=terminal_output)
+        print(pos_label, file=terminal_output)
+        print(pos_label.shape, file=terminal_output)
+        print('neg_label', file=terminal_output)
+        print(neg_label, file=terminal_output)
+        print(neg_label.shape, file=terminal_output)
+        print('pos_prob', file=terminal_output)
+        print(pos_prob, file=terminal_output)
+        print(pos_prob.shape, file=terminal_output)
+
+        print('neg_prob', file=terminal_output)
+        print(neg_prob, file=terminal_output)
+        print(neg_prob.shape, file=terminal_output)
+        exit(1)
         #################           BCE            #######################
         if len(pos_prob):
             pos_prob=pos_prob.to(self.device)
