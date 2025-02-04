@@ -80,35 +80,20 @@ class Loss(nn.Module):
             pos_prob=pos_prob.to(self.device)
             pos_label=pos_label.to(self.device)
             pos_loss = self.classify_loss(pos_prob, pos_label)
-            print('pos_label', file=terminal_output)
-            print(pos_label, file=terminal_output)
-            print(pos_label.shape, file=terminal_output)
-            print('pos_prob', file=terminal_output)
-            print(pos_prob, file=terminal_output)
-            print(pos_prob.shape, file=terminal_output)
-            print('pos_loss', file=terminal_output)
-            print(pos_loss, file=terminal_output)
-            print(pos_loss.shape, file=terminal_output)
-            exit(1)
+
         if len(neg_prob):
             neg_prob=neg_prob.to(self.device)
             neg_label=neg_label.to(self.device)
             neg_loss = self.classify_loss(neg_prob, neg_label)
-            print('neg_label', file=terminal_output)
-            print(neg_label, file=terminal_output)
-            print(neg_label.shape, file=terminal_output)
-            print('neg_prob', file=terminal_output)
-            print(neg_prob, file=terminal_output)
-            print(neg_prob.shape, file=terminal_output)
-            print('neg_loss', file=terminal_output)
-            print(neg_loss, file=terminal_output)
-            print(neg_loss.shape, file=terminal_output)
-            exit(1)
+
         classify_loss = pos_loss + neg_loss
         logits=logits.to(self.device)
         labels=labels.to(self.device)
         classify_loss2 = self.classify_loss2(logits, labels)
-        
+        print('classify_loss', file=terminal_output)
+        print(classify_loss, file=terminal_output)
+        print(classify_loss.shape, file=terminal_output)
+        exit(1)
         if train:
             return classify_loss
         #################           AUROC            #######################
