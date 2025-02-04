@@ -150,8 +150,9 @@ class GraphExplorer(ABC):
         # [meds, chart, out, proc, lab, stat, demo]
         backcast = x[1]
         nv = x[2]
-        x = x[0]
         y_truth = x[3]
+        x = x[0]
+
         print('y_truth', file=terminal_output)
         print(y_truth, file=terminal_output)
         print(y_truth.shape, file=terminal_output)
