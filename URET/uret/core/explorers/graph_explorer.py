@@ -152,6 +152,10 @@ class GraphExplorer(ABC):
         nv = x[2]
         x = x[0]
         y_truth = x[3]
+        print('y_truth', file=terminal_output)
+        print(y_truth, file=terminal_output)
+        print(y_truth.shape, file=terminal_output)
+        exit(1)
     # for i in range(len(x[0])):
     #     sample = x[0][i], x[1][i], x[2][i], x[3][i], x[4], x[5][i], x[6][i]
         sample = x[0], x[1], x[2], x[3], x[4], x[5], x[6]
