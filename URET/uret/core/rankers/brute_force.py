@@ -30,7 +30,6 @@ class BruteForce(RankingAlgorithm):
         # Nawawy's MIMIC start
         original_sample = sample[0]
         sample = sample[0][1]
-        print(type(sample), file=terminal_output)
         number_of_instances = len(sample)
         sample = np.array(sample).reshape(number_of_instances*backcast*nv)
         # Nawawy's MIMIC end
@@ -98,9 +97,9 @@ class BruteForce(RankingAlgorithm):
                 print(torch.tensor(test_truth).shape, file=terminal_output)
                 print('test_logits', file=terminal_output)
                 print(torch.tensor(test_logits).shape, file=terminal_output)
-
-                score = scoring_function(torch.tensor(test_prob), torch.tensor(test_truth), torch.tensor(test_logits), False, False)
                 exit(1)
+                score = scoring_function(torch.tensor(test_prob), torch.tensor(test_truth), torch.tensor(test_logits), False, False)
+
 
                 sample_temp = sample_temp.reshape(backcast * nv)
                 # Nawawy's end
