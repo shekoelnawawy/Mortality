@@ -279,8 +279,12 @@ class DL_models():
         for nbatch in range(int(len(test_hids)/(args.batch_size))):
             #print(test_hids[nbatch*args.batch_size:(nbatch+1)*args.batch_size])
             meds,chart,out,proc,lab,stat,demo,y=self.getXY(test_hids[nbatch*args.batch_size:(nbatch+1)*args.batch_size],labels)
-
-
+            terminal_output = open('/dev/stdout', 'w')
+            print('y', file=terminal_output)
+            print(y, file=terminal_output)
+            print(y.shape, file=terminal_output)
+            exit(1)
+            # for nbatch in range(int(len(train_hids) / (args.batch_size))):
             # Nawawy's MIMIC start
             # CALL URET HERE
             if adversary:
