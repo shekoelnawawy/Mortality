@@ -77,14 +77,6 @@ class BruteForce(RankingAlgorithm):
                 new_prediction, logits = model_predict(original_sample[0], torch.from_numpy(sample_temp), original_sample[2], original_sample[3], original_sample[4], original_sample[5], original_sample[6])
                 # new_prediction, _, _, _, _ = model_predict(feature_extractor(sample_temp))
 
-                # print('score_input', file=terminal_output)
-                # print(score_input, file=terminal_output)
-                # print('new_prediction', file=terminal_output)
-                # print(new_prediction, file=terminal_output)
-                # print('score_input.shape', file=terminal_output)
-                # print(score_input.shape, file=terminal_output)
-                # print('new_prediction.shape', file=terminal_output)
-                # print(new_prediction.shape, file=terminal_output)
                 test_prob=[]
                 test_logits=[]
                 test_truth=[]
@@ -92,11 +84,6 @@ class BruteForce(RankingAlgorithm):
                 test_truth.extend(score_input.data.cpu().numpy())
                 test_logits.extend(logits.data.cpu().numpy())
 
-                # print('test_truth.shape', file=terminal_output)
-                # print(torch.tensor(test_truth).shape, file=terminal_output)
-                # print('test_truth.shape', file=terminal_output)
-                # print(torch.reshape(torch.tensor(test_truth), (len(torch.tensor(test_truth)),1)).shape, file=terminal_output)
-                # exit(1)
                 score = scoring_function(torch.tensor(test_prob), torch.reshape(torch.tensor(test_truth), (len(torch.tensor(test_truth)),1)), torch.tensor(test_logits), False, False)
 
                 print('score', file=terminal_output)

@@ -52,6 +52,8 @@ class Loss(nn.Module):
 #         print(prob.shape)
 #         print(labels.shape)
         #print(prob)
+        terminal_output = open('/dev/stdout', 'w')
+        print('I am here', file=terminal_output)
         if standalone:
             prob=torch.tensor(prob)
             labels=torch.tensor(labels)
