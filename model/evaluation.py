@@ -53,7 +53,7 @@ class Loss(nn.Module):
 #         print(labels.shape)
         #print(prob)
         terminal_output = open('/dev/stdout', 'w')
-        print('I am here', file=terminal_output)
+
         if standalone:
             prob=torch.tensor(prob)
             labels=torch.tensor(labels)
@@ -62,7 +62,15 @@ class Loss(nn.Module):
         prob=prob.type(torch.FloatTensor)
         labels=labels.type(torch.FloatTensor)
         logits=logits.type(torch.FloatTensor)
-        
+        print('prob', file=terminal_output)
+        print(prob.shape, file=terminal_output)
+
+        print('labels', file=terminal_output)
+        print(labels.shape, file=terminal_output)
+
+        print('logits', file=terminal_output)
+        print(logits.shape, file=terminal_output)
+
         pos_ind = labels >= 0.5
         neg_ind = labels < 0.5
         pos_label = labels[pos_ind]
