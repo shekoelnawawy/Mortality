@@ -3,7 +3,9 @@ from abc import ABC, abstractmethod
 import numpy as np
 import random
 import tqdm
-
+# Nawawy's MIMIC start
+import torch
+# Nawawy's MIMIC end
 
 def create_default_loss_func(scoring_alg, feature_extractor, model_predict, target_label=None):
     """
@@ -177,7 +179,20 @@ class GraphExplorer(ABC):
 
         for sample_next, transformation_record, _ in self.search([sample, backcast, nv], score_input):
             # Score the current sample
-            score = self.scoring_function(sample_next, score_input)
+            # Nawawy's MIMIC start
+            new_prediction, logits = self.model_predict(sample_next[0], sample_next[1], sample_next[2], sample_next[3], sample_next[4], sample_next[5], sample_next[6])
+            test_prob = []
+            test_logits = []
+            test_truth = []
+            test_prob.extend(new_prediction.data.cpu().numpy())
+            test_truth.extend(score_input.data.cpu().numpy())
+            test_logits.extend(logits.data.cpu().numpy())
+            # score = self.scoring_function(sample_next, score_input)
+            score = self.scoring_function(torch.tensor(test_prob), torch.reshape(torch.tensor(test_truth), (len(torch.tensor(test_truth)), 1)), torch.tensor(test_logits), True, False)
+            print('score', file=terminal_output)
+            print(score, file=terminal_output)
+            exit(1)
+            # Nawawy's MIMIC end
 
             # For all loss types, we can early exit if an adversarial example is found
             new_prediction = self.model_predict(self.feature_extractor(sample_next))
@@ -213,6 +228,11 @@ class GraphExplorer(ABC):
         print('-------------------------------------------', file=terminal_output)
         # Nawawy's MIMIC end
         exit(1)
+        if return_record:
+            return generated_samples, records
+
+        return generated_samples
+
         for i, sample in enumerate(tqdm.tqdm(x)):
             original_pred, logits = self.model_predict(meds[i].unsqueeze(0), chart[i].unsqueeze(0), out[i].unsqueeze(0), proc[i].unsqueeze(0), lab, stat[i].unsqueeze(0), demo[i].unsqueeze(0))
             if len(np.shape(original_pred)) == 2:
