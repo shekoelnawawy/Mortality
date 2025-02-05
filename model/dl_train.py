@@ -292,15 +292,15 @@ class DL_models():
                 explore_params = [allPatients_benign, chart.shape[1], chart.shape[2], y]
 
                 allPatients_adversarial = explorer.explore(explore_params)
-                # terminal_output = open('/dev/stdout', 'w')
-                # print(allPatients_adversarial[0].shape, file=terminal_output)
-                # print(allPatients_adversarial[1].shape, file=terminal_output)
-                # print(allPatients_adversarial[2].shape, file=terminal_output)
-                # print(allPatients_adversarial[3].shape, file=terminal_output)
-                # print(allPatients_adversarial[4].shape, file=terminal_output)
-                # print(allPatients_adversarial[5].shape, file=terminal_output)
-                # print(allPatients_adversarial[6].shape, file=terminal_output)
-                # exit(1)
+                terminal_output = open('/dev/stdout', 'w')
+                print(allPatients_adversarial[0].shape, file=terminal_output)
+                print(allPatients_adversarial[1].shape, file=terminal_output)
+                print(allPatients_adversarial[2].shape, file=terminal_output)
+                print(allPatients_adversarial[3].shape, file=terminal_output)
+                print(allPatients_adversarial[4].shape, file=terminal_output)
+                print(allPatients_adversarial[5].shape, file=terminal_output)
+                print(allPatients_adversarial[6].shape, file=terminal_output)
+                exit(1)
 
 
                 # allPatients_adversarial = np.array(explorer.explore(explore_params))
