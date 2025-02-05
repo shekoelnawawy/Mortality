@@ -293,7 +293,13 @@ class DL_models():
 
                 allPatients_adversarial = explorer.explore(explore_params)
                 terminal_output = open('/dev/stdout', 'w')
-                print(allPatients_adversarial, file=terminal_output)
+                print(allPatients_adversarial[0].shape, file=terminal_output)
+                print(allPatients_adversarial[1].shape, file=terminal_output)
+                print(allPatients_adversarial[2].shape, file=terminal_output)
+                print(allPatients_adversarial[3].shape, file=terminal_output)
+                print(allPatients_adversarial[4].shape, file=terminal_output)
+                print(allPatients_adversarial[5].shape, file=terminal_output)
+                print(allPatients_adversarial[6].shape, file=terminal_output)
                 exit(1)
 
 
