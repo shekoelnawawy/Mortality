@@ -205,8 +205,6 @@ class GraphExplorer(ABC):
             # Nawway's MIMIC start
             elif np.sum(new_prediction.data.cpu().numpy()) > np.sum(original_pred.data.cpu().numpy()):
             # Nawawy's MIMIC end
-                print('IamHere', file=terminal_output)
-                exit(1)
                 best_sample = sample_next
                 best_score = score
                 if return_record:
@@ -226,6 +224,7 @@ class GraphExplorer(ABC):
         generated_samples.append(best_sample)
         print('generated_samples', file=terminal_output)
         print(generated_samples, file=terminal_output)
+        # print(generated_samples, file=terminal_output)
         print('-------------------------------------------', file=terminal_output)
         # Nawawy's MIMIC end
         exit(1)
