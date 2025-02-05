@@ -72,7 +72,13 @@ class BeamSearchGraphExplorer(GraphExplorer):
         # Nawawy's end
         terminal_output = open('/dev/stdout', 'w')
         print('sample', file=terminal_output)
-        print(type(sample), file=terminal_output)
+        print(sample[0].shape, file=terminal_output)
+        print(sample[1].shape, file=terminal_output)
+        print(sample[2].shape, file=terminal_output)
+        print(sample[3].shape, file=terminal_output)
+        print(sample[4].shape, file=terminal_output)
+        print(sample[5].shape, file=terminal_output)
+        print(sample[6].shape, file=terminal_output)
 
         if depth >= self.max_depth:
             return
