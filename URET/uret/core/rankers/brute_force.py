@@ -99,7 +99,7 @@ class BruteForce(RankingAlgorithm):
                 print(sample_temp[4].shape, file=terminal_output)
                 print(sample_temp[5].shape, file=terminal_output)
                 print(sample_temp[6].shape, file=terminal_output)
-
+                exit(1)
                 # Nawawy's end
                 if self.multi_feature_input:
                     return_values.append(
