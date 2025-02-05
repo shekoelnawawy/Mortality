@@ -176,7 +176,6 @@ class GraphExplorer(ABC):
             score_input = target_features
 
         for sample_next, transformation_record, _ in self.search([sample, backcast, nv], score_input):
-            print('True', file=terminal_output)
             # Score the current sample
             score = self.scoring_function(sample_next, score_input)
 

@@ -52,7 +52,6 @@ class Loss(nn.Module):
 #         print(prob.shape)
 #         print(labels.shape)
         #print(prob)
-        terminal_output = open('/dev/stdout', 'w')
 
         if standalone:
             prob=torch.tensor(prob)
