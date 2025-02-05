@@ -204,7 +204,7 @@ class GraphExplorer(ABC):
                     best_record = transformation_record
                 break
             # Nawway's MIMIC start
-            elif (new_prediction.data.cpu().numpy()>=0.5).sum() > (original_pred.data.cpu().numpy()>=0.5).sum():
+            elif (new_prediction.data.cpu().numpy()>=0.5).sum() >= (original_pred.data.cpu().numpy()>=0.5).sum():
             # Nawawy's MIMIC end
                 terminal_output = open('/dev/stdout', 'w')
                 print('IamHere', file=terminal_output)
