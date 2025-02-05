@@ -196,18 +196,17 @@ class GraphExplorer(ABC):
             if len(np.shape(new_prediction)) == 2:
                 new_prediction = new_prediction
 
-            print('new_prediction', file=terminal_output)
-            print(new_prediction, file=terminal_output)
-            print(new_prediction.shape, file=terminal_output)
-            exit(1)
-
             if self.target_label is not None and np.argmax(new_prediction) == self.target_label:
                 best_sample = sample_next
                 best_score = score
                 if return_record:
                     best_record = transformation_record
                 break
-            elif np.argmax(new_prediction) != np.argmax(original_pred):
+            # Nawway's MIMIC start
+            elif np.sum(new_prediction) > np.sum(original_pred):
+            # Nawawy's MIMIC end
+                print('IamHere', file=terminal_output)
+                exit(1)
                 best_sample = sample_next
                 best_score = score
                 if return_record:
