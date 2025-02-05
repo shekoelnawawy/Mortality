@@ -88,17 +88,7 @@ class BruteForce(RankingAlgorithm):
 
                 # sample_temp = sample_temp.reshape(backcast * nv)
                 sample_temp = original_sample[0], torch.from_numpy(sample_temp), original_sample[2], original_sample[3], original_sample[4], original_sample[5], original_sample[6]
-                # sample_temp = torch.tensor(sample_temp)
-                print('sample_temp', file=terminal_output)
-                print(sample_temp, file=terminal_output)
-                print(sample_temp[0].shape, file=terminal_output)
-                print(sample_temp[1].shape, file=terminal_output)
-                print(sample_temp[2].shape, file=terminal_output)
-                print(sample_temp[3].shape, file=terminal_output)
-                print(sample_temp[4].shape, file=terminal_output)
-                print(sample_temp[5].shape, file=terminal_output)
-                print(sample_temp[6].shape, file=terminal_output)
-                exit(1)
+
                 # Nawawy's end
                 if self.multi_feature_input:
                     return_values.append(
