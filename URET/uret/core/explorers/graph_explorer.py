@@ -191,7 +191,7 @@ class GraphExplorer(ABC):
             score = self.scoring_function(torch.tensor(test_prob), torch.reshape(torch.tensor(test_truth), (len(torch.tensor(test_truth)), 1)), torch.tensor(test_logits), True, False)
 
             terminal_output = open('/dev/stdout', 'w')
-            print(new_prediction.data.cpu().numpy()[new_prediction.data.cpu().numpy()>=0.5], file=terminal_output)
+            print(new_prediction.data.cpu().numpy()>=0.7, file=terminal_output)
             print(new_prediction.data.cpu().numpy().shape, file=terminal_output)
             exit(1)
             # For all loss types, we can early exit if an adversarial example is found
