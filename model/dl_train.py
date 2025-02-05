@@ -290,10 +290,11 @@ class DL_models():
                 allPatients_benign = meds, chart, out, proc, lab, stat, demo
 
                 explore_params = [allPatients_benign, chart.shape[1], chart.shape[2], y]
-                # terminal_output = open('/dev/stdout', 'w')
-                # print(chart.shape, file=terminal_output)
 
-                explorer.explore(explore_params)
+                allPatients_adversarial = explorer.explore(explore_params)
+                terminal_output = open('/dev/stdout', 'w')
+                print(allPatients_adversarial, file=terminal_output)
+                exit(1)
 
 
                 allPatients_adversarial = np.array(explorer.explore(explore_params))

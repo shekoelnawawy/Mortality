@@ -149,7 +149,6 @@ class GraphExplorer(ABC):
         # if return_record:
         #     records = []
 
-        terminal_output = open('/dev/stdout', 'w')
         # [meds, chart, out, proc, lab, stat, demo]
         backcast = x[1]
         nv = x[2]

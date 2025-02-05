@@ -24,7 +24,6 @@ class BruteForce(RankingAlgorithm):
     # Nawawy's start
     def rank_edges(self, sample, scoring_function, score_input, model_predict, feature_extractor, dependencies=[],
                    current_transformation_records=None):
-        terminal_output = open('/dev/stdout', 'w')
         backcast = sample[1]
         nv = sample[2]
         # Nawawy's MIMIC start
