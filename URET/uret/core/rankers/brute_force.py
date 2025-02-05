@@ -33,15 +33,6 @@ class BruteForce(RankingAlgorithm):
         sample = sample[0][1]
         number_of_instances = len(sample)
         sample = np.array(sample).reshape(number_of_instances*backcast*nv)
-
-        print('original_sample', file=terminal_output)
-        print(original_sample[0].shape, file=terminal_output)
-        print(original_sample[1].shape, file=terminal_output)
-        print(original_sample[2].shape, file=terminal_output)
-        print(original_sample[3].shape, file=terminal_output)
-        print(original_sample[4].shape, file=terminal_output)
-        print(original_sample[5].shape, file=terminal_output)
-        print(original_sample[6].shape, file=terminal_output)
         # Nawawy's MIMIC end
     # Nawawy's end
 
@@ -96,7 +87,19 @@ class BruteForce(RankingAlgorithm):
 
                 score = scoring_function(torch.tensor(test_prob), torch.reshape(torch.tensor(test_truth), (len(torch.tensor(test_truth)),1)), torch.tensor(test_logits), True, False)
 
-                sample_temp = sample_temp.reshape(backcast * nv)
+                # sample_temp = sample_temp.reshape(backcast * nv)
+                sample_temp = [original_sample[0], torch.from_numpy(sample_temp), original_sample[2], original_sample[3], original_sample[4], original_sample[5], original_sample[6]]
+                sample_temp = torch.tensor(sample_temp)
+                print('sample_temp', file=terminal_output)
+                print(sample_temp, file=terminal_output)
+                print(sample_temp[0].shape, file=terminal_output)
+                print(sample_temp[1].shape, file=terminal_output)
+                print(sample_temp[2].shape, file=terminal_output)
+                print(sample_temp[3].shape, file=terminal_output)
+                print(sample_temp[4].shape, file=terminal_output)
+                print(sample_temp[5].shape, file=terminal_output)
+                print(sample_temp[6].shape, file=terminal_output)
+
                 # Nawawy's end
                 if self.multi_feature_input:
                     return_values.append(
