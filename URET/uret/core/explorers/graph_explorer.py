@@ -143,11 +143,12 @@ class GraphExplorer(ABC):
             elif len(target_features) != len(x):
                 raise ValueError("There must be as many target features as inputs")
 
-        generated_samples = []
-
-        if return_record:
-            records = []
         # Nawawy's MIMIC start
+        # generated_samples = []
+        #
+        # if return_record:
+        #     records = []
+
         terminal_output = open('/dev/stdout', 'w')
         # [meds, chart, out, proc, lab, stat, demo]
         backcast = x[1]
@@ -217,91 +218,14 @@ class GraphExplorer(ABC):
                 best_score = score
                 if return_record:
                     best_record = transformation_record
+        # Nawway's MIMIC start
 
         if return_record:
-            records.append(best_record)
+            return best_sample, best_record
 
-        generated_samples.append(best_sample)
-        print('generated_samples', file=terminal_output)
-        print(best_sample[0].shape, file=terminal_output)
-        print(best_sample[1].shape, file=terminal_output)
-        print(best_sample[2].shape, file=terminal_output)
-        print(best_sample[3].shape, file=terminal_output)
-        print(best_sample[4].shape, file=terminal_output)
-        print(best_sample[5].shape, file=terminal_output)
-        print(best_sample[6].shape, file=terminal_output)
-        print('-------------------------------------------', file=terminal_output)
+        return best_sample
         # Nawawy's MIMIC end
-        exit(1)
-        if return_record:
-            return generated_samples, records
 
-        return generated_samples
-
-        for i, sample in enumerate(tqdm.tqdm(x)):
-            original_pred, logits = self.model_predict(meds[i].unsqueeze(0), chart[i].unsqueeze(0), out[i].unsqueeze(0), proc[i].unsqueeze(0), lab, stat[i].unsqueeze(0), demo[i].unsqueeze(0))
-            if len(np.shape(original_pred)) == 2:
-                original_pred = original_pred[0]
-
-            best_sample = None
-            best_score = np.inf
-            if return_record:
-                best_record = None
-
-            if self.scoring_alg == "model_loss":
-                score_input = original_pred
-            else:
-                score_input = target_features[i]
-
-            for sample_next, transformation_record, _ in self.search(sample, score_input):
-
-                # Score the current sample
-                score = self.scoring_function(sample_next, score_input)
-
-                # Early exit conditions
-                # If using feature loss, then we can early exit once the target features are attained
-                # Maybe consider a "close-enough" condition instead?
-                if self.scoring_alg == "feature_loss" and np.array_equal(
-                    target_features[i], self.feature_extractor(sample_next)
-                ):
-                    best_sample = sample_next
-                    best_score = score
-                    break
-
-                # For all loss types, we can early exit if an adversarial example is found
-                new_prediction = self.model_predict(self.feature_extractor(sample_next))
-                if len(np.shape(new_prediction)) == 2:
-                    new_prediction = new_prediction
-
-                if self.target_label is not None and np.argmax(new_prediction) == self.target_label:
-                    best_sample = sample_next
-                    best_score = score
-                    if return_record:
-                        best_record = transformation_record
-                    break
-                elif np.argmax(new_prediction) != np.argmax(original_pred):
-                    best_sample = sample_next
-                    best_score = score
-                    if return_record:
-                        best_record = transformation_record
-                    break
-
-                # Check if the current sample is better
-                if best_sample is None or score < best_score:
-                    best_sample = sample_next
-                    best_score = score
-                    if return_record:
-                        best_record = transformation_record
-
-            if return_record:
-                records.append(best_record)
-
-            generated_samples.append(best_sample)
-
-        if return_record:
-            return generated_samples, records
-
-        return generated_samples
 
     def _enforce_dependencies(self, sample):
         """
