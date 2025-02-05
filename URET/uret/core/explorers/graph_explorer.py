@@ -206,9 +206,6 @@ class GraphExplorer(ABC):
             # Nawway's MIMIC start
             elif (new_prediction.data.cpu().numpy()>=0.5).sum() >= (original_pred.data.cpu().numpy()>=0.5).sum() and (new_prediction.data.cpu().numpy()>=0.5).sum() > (score_input.data.cpu().numpy()>=0.5).sum():
             # Nawawy's MIMIC end
-                terminal_output = open('/dev/stdout', 'w')
-                print('IamHere', file=terminal_output)
-                exit(1)
                 best_sample = sample_next
                 best_score = score
                 if return_record:
