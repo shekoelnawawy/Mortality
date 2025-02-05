@@ -190,6 +190,10 @@ class GraphExplorer(ABC):
             # score = self.scoring_function(sample_next, score_input)
             score = self.scoring_function(torch.tensor(test_prob), torch.reshape(torch.tensor(test_truth), (len(torch.tensor(test_truth)), 1)), torch.tensor(test_logits), True, False)
 
+            terminal_output = open('/dev/stdout', 'w')
+            print(new_prediction.data.cpu().numpy(), file=terminal_output)
+            print(new_prediction.data.cpu().numpy().shape, file=terminal_output)
+            exit(1)
             # For all loss types, we can early exit if an adversarial example is found
             # new_prediction = self.model_predict(self.feature_extractor(sample_next))
             # Nawawy's MIMIC end
