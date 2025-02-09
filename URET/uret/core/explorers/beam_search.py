@@ -145,6 +145,11 @@ class BeamSearchGraphExplorer(GraphExplorer):
                     sample_next
                 )  # Enforce dependencies since ranking algorithm did not
 
+            terminal_output = open('/dev/stdout', 'w')
+            print('sample_next', file=terminal_output)
+            print(sample_next, file=terminal_output)
+            print(sample_next.shape, file=terminal_output)
+
             # Only evaluate nodes that haven't been previously visited
             if not np.any(
                 [np.all(sample_next == v) for v in self.visited_nodes]
