@@ -292,15 +292,14 @@ class DL_models():
                 explore_params = [allPatients_benign, chart.shape[1], chart.shape[2], y]
 
                 allPatients_adversarial = explorer.explore(explore_params)
-                terminal_output = open('/dev/stdout', 'w')
-                print(allPatients_adversarial[0].shape, file=terminal_output)
-                print(allPatients_adversarial[1].shape, file=terminal_output)
-                print(allPatients_adversarial[2].shape, file=terminal_output)
-                print(allPatients_adversarial[3].shape, file=terminal_output)
-                print(allPatients_adversarial[4].shape, file=terminal_output)
-                print(allPatients_adversarial[5].shape, file=terminal_output)
-                print(allPatients_adversarial[6].shape, file=terminal_output)
-                exit(1)
+
+                meds = allPatients_adversarial[0]
+                chart = allPatients_adversarial[1]
+                out = allPatients_adversarial[2]
+                proc = allPatients_adversarial[3]
+                lab = allPatients_adversarial[4]
+                stat = allPatients_adversarial[5]
+                demo = allPatients_adversarial[6]
 
 
                 # allPatients_adversarial = np.array(explorer.explore(explore_params))
@@ -328,6 +327,14 @@ class DL_models():
 
             output,logits = self.net(meds,chart,out,proc,lab,stat,demo)
 #             self.model_interpret([meds,chart,out,proc,lab,stat,demo])
+            terminal_output = open('/dev/stdout', 'w')
+            print('output', file=terminal_output)
+            print(output, file=terminal_output)
+            print(output.shape, file=terminal_output)
+            print('logits', file=terminal_output)
+            print(logits, file=terminal_output)
+            print(logits.shape, file=terminal_output)
+            exit(1)
             output=output.squeeze()
             logits=logits.squeeze()
 #             print(demo.shape)
