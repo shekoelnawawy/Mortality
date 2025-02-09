@@ -148,7 +148,12 @@ class BeamSearchGraphExplorer(GraphExplorer):
             terminal_output = open('/dev/stdout', 'w')
             print('sample_next', file=terminal_output)
             print(sample_next, file=terminal_output)
-            print(sample_next.shape, file=terminal_output)
+            # print(sample_next.shape, file=terminal_output)
+            for v in self.visited_nodes:
+                print('visited_node', file=terminal_output)
+                print(v, file=terminal_output)
+                print(v.shape, file=terminal_output)
+                exit(1)
 
             # Only evaluate nodes that haven't been previously visited
             if not np.any(
