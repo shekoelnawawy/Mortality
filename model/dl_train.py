@@ -327,14 +327,8 @@ class DL_models():
 
             output,logits = self.net(meds,chart,out,proc,lab,stat,demo)
 #             self.model_interpret([meds,chart,out,proc,lab,stat,demo])
-            terminal_output = open('/dev/stdout', 'w')
-            print('output', file=terminal_output)
-            print(output, file=terminal_output)
-            print(output.shape, file=terminal_output)
-            print('logits', file=terminal_output)
-            print(logits, file=terminal_output)
-            print(logits.shape, file=terminal_output)
-            exit(1)
+#             terminal_output = open('/dev/stdout', 'w')
+
             output=output.squeeze()
             logits=logits.squeeze()
 #             print(demo.shape)
