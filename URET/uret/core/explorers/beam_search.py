@@ -157,7 +157,7 @@ class BeamSearchGraphExplorer(GraphExplorer):
             #
 
             for v in self.visited_nodes:
-                print(v[0][1].shape, file=terminal_output)
+                print(v[1].shape, file=terminal_output)
 
             print('-----------------------------', file=terminal_output)
 
