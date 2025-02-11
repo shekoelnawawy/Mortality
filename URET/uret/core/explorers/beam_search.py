@@ -155,6 +155,12 @@ class BeamSearchGraphExplorer(GraphExplorer):
             #     # print(self.visited_nodes[0][1], file=terminal_output)
             #     print(self.visited_nodes[0][1].shape, file=terminal_output)
             #
+
+            for v in self.visited_nodes:
+                print(v[0][1].shape, file=terminal_output)
+
+            print('-----------------------------', file=terminal_output)
+
             # Only evaluate nodes that haven't been previously visited
             if not np.any(
                 [np.all(sample_next[1] == v[0][1]) for v in self.visited_nodes]
