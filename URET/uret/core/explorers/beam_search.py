@@ -163,7 +163,7 @@ class BeamSearchGraphExplorer(GraphExplorer):
 
             # Only evaluate nodes that haven't been previously visited
             if not np.any(
-                [np.all(sample_next[1] == v[1]) for v in self.visited_nodes]
+                [np.all(sample_next[1].numpy().reshape(-1, len(sample_next[1])*backcast*nv) == v[1].numpy().reshape(-1, len(v[1])*backcast*nv)) for v in self.visited_nodes]
             ):  # This might not work with all data types?
                 if convert_back_to_list:  # Restore back to list
                     sample_next = list(sample_next)
