@@ -276,7 +276,9 @@ class DL_models():
         self.logits=[]
         self.net.eval()
         #print(len(test_hids))
+        terminal_output = open('/dev/stdout', 'w')
         for nbatch in range(int(len(test_hids)/(args.batch_size))):
+            print('nbatch = '+str(nbatch), file=terminal_output)
             #print(test_hids[nbatch*args.batch_size:(nbatch+1)*args.batch_size])
             meds,chart,out,proc,lab,stat,demo,y=self.getXY(test_hids[nbatch*args.batch_size:(nbatch+1)*args.batch_size],labels)
 
@@ -327,7 +329,6 @@ class DL_models():
 
             output,logits = self.net(meds,chart,out,proc,lab,stat,demo)
 #             self.model_interpret([meds,chart,out,proc,lab,stat,demo])
-#             terminal_output = open('/dev/stdout', 'w')
 
             output=output.squeeze()
             logits=logits.squeeze()
