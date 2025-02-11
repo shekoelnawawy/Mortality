@@ -147,9 +147,9 @@ class BeamSearchGraphExplorer(GraphExplorer):
 
             # sample = sample[0][1]
             terminal_output = open('/dev/stdout', 'w')
-            print('sample_next[0][1]', file=terminal_output)
-            print(sample_next[0][1], file=terminal_output)
-            print(sample_next[0][1].shape, file=terminal_output)
+            print('sample_next[1]', file=terminal_output)
+            print(sample_next[1], file=terminal_output)
+            print(sample_next[1].shape, file=terminal_output)
             print('self.visited_nodes[0][0][1]', file=terminal_output)
             print(self.visited_nodes[0][0][1], file=terminal_output)
             print(self.visited_nodes[0][0][1].shape, file=terminal_output)
