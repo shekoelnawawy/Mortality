@@ -369,14 +369,14 @@ class DL_models():
             # Nawawy's MIMIC start
             if adversary:
                 if nbatch == 0:
-                    adversarial_output = output.numpy()
+                    adversarial_output = output.detach().numpy()
                 else:
-                    adversarial_output = np.append(adversarial_output, output.numpy())
+                    adversarial_output = np.append(adversarial_output, output.detach().numpy())
             else:
                 if nbatch == 0:
-                    benign_output = output.numpy()
+                    benign_output = output.detach().numpy()
                 else:
-                    benign_output = np.append(benign_output, output.numpy())
+                    benign_output = np.append(benign_output, output.detach().numpy())
             # Nawawy's MIMIC end
             output=output.squeeze()
             logits=logits.squeeze()
