@@ -335,11 +335,11 @@ class DL_models():
                 demo = allPatients_adversarial[6]
 
                 if nbatch == 0:
-                    benign_data = allPatients_benign[1].data().cpu().numpy()                                             # benign chart
-                    adversarial_data = allPatients_adversarial[1].data().cpu().numpy()                                   # adversarial chart
+                    benign_data = allPatients_benign[1].detach().cpu().numpy()                                             # benign chart
+                    adversarial_data = allPatients_adversarial[1].detach().cpu().numpy()                                   # adversarial chart
                 else:
-                    benign_data = np.append(benign_data, allPatients_benign[1].data().cpu().numpy())                     # benign chart
-                    adversarial_data = np.append(adversarial_data, allPatients_adversarial[1].data().cpu().numpy())      # adversarial chart
+                    benign_data = np.append(benign_data, allPatients_benign[1].detach().cpu().numpy())                     # benign chart
+                    adversarial_data = np.append(adversarial_data, allPatients_adversarial[1].detach().cpu().numpy())      # adversarial chart
 
                 # allPatients_adversarial = np.array(explorer.explore(explore_params))
                 #
@@ -369,14 +369,14 @@ class DL_models():
 #             # Nawawy's MIMIC start
             if adversary:
                 if nbatch == 0:
-                    adversarial_output = output.data().cpu().numpy()
+                    adversarial_output = output.detach().cpu().numpy()
                 else:
-                    adversarial_output = np.append(adversarial_output, output.data().cpu().numpy())
+                    adversarial_output = np.append(adversarial_output, output.detach().cpu().numpy())
             else:
                 if nbatch == 0:
-                    benign_output = output.data().cpu().numpy()
+                    benign_output = output.detach().cpu().numpy()
                 else:
-                    benign_output = np.append(benign_output, output.data().cpu().numpy())
+                    benign_output = np.append(benign_output, output.detach().cpu().numpy())
 #             # Nawawy's MIMIC end
             output=output.squeeze()
             logits=logits.squeeze()
