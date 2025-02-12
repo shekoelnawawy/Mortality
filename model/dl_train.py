@@ -312,9 +312,9 @@ class DL_models():
 
             # Nawawy's MIMIC start
             if nbatch == 0:
-                target_output = y.data().cpu().numpy()
+                target_output = y.numpy()
             else:
-                target_output = np.append(target_output, y.data().cpu().numpy())
+                target_output = np.append(target_output, y.numpy())
             # CALL URET HERE
             if adversary:
                 explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
