@@ -115,7 +115,7 @@ class DL_models():
                 print("==================={0:2d} FOLD=====================".format(i))
                 test_hids = list(k_hids[i])
                 # self.model_test(test_hids, adversary=True)
-                benign_data_temp, adversarial_data_temp, benign_output_temp, adversarial_output_temp, target_output_temp = self.model_test(test_hids, adversary=False)
+                benign_data_temp, adversarial_data_temp, benign_output_temp, adversarial_output_temp, target_output_temp = self.model_test(test_hids, adversary=True)
 
                 if i == 0:
                     benign_data = benign_data_temp
@@ -316,17 +316,16 @@ class DL_models():
             meds,chart,out,proc,lab,stat,demo,y=self.getXY(test_hids[nbatch*args.batch_size:(nbatch+1)*args.batch_size],labels)
 
             # Nawawy's MIMIC start
-            allPatients_benign = meds, chart, out, proc, lab, stat, demo
             if nbatch == 0:
                 target_output = y.numpy()
-                benign_data = allPatients_benign[1].detach().cpu().numpy()      # benign chart
             else:
                 target_output = np.append(target_output, y.numpy())
-                benign_data = np.append(benign_data, allPatients_benign[1].detach().cpu().numpy())      # benign chart
             # CALL URET HERE
             if adversary:
                 explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
                 explorer.scoring_function = self.loss
+
+                allPatients_benign = meds, chart, out, proc, lab, stat, demo
 
                 explore_params = [allPatients_benign, chart.shape[1], chart.shape[2], y]
 
@@ -341,8 +340,10 @@ class DL_models():
                 demo = allPatients_adversarial[6]
 
                 if nbatch == 0:
+                    benign_data = allPatients_benign[1].detach().cpu().numpy()                                             # benign chart
                     adversarial_data = allPatients_adversarial[1].detach().cpu().numpy()                                   # adversarial chart
                 else:
+                    benign_data = np.append(benign_data, allPatients_benign[1].detach().cpu().numpy())                     # benign chart
                     adversarial_data = np.append(adversarial_data, allPatients_adversarial[1].detach().cpu().numpy())      # adversarial chart
 
                 # allPatients_adversarial = np.array(explorer.explore(explore_params))
