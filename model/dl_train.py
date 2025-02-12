@@ -109,27 +109,27 @@ class DL_models():
             for i in range(self.k_fold):
                 print("==================={0:2d} FOLD=====================".format(i))
                 test_hids = list(k_hids[i])
-                self.model_test(test_hids, adversary=True)
-                # benign_data_temp, adversarial_data_temp, benign_output_temp, adversarial_output_temp, target_output_temp = self.model_test(test_hids, adversary=True)
+                # self.model_test(test_hids, adversary=True)
+                benign_data_temp, adversarial_data_temp, benign_output_temp, adversarial_output_temp, target_output_temp = self.model_test(test_hids, adversary=True)
 
-            #     if i == 0:
-            #         benign_data = benign_data_temp
-            #         adversarial_data = adversarial_data_temp
-            #         benign_output = benign_output_temp
-            #         adversarial_output = adversarial_output_temp
-            #         target_output = target_output_temp
-            #     else:
-            #         benign_data = np.append(benign_data, benign_data_temp)
-            #         adversarial_data = np.append(adversarial_data, adversarial_data_temp)
-            #         benign_output = np.append(benign_output, benign_output_temp)
-            #         adversarial_output = np.append(adversarial_output, adversarial_output_temp)
-            #         target_output = np.append(target_output, target_output_temp)
-            #
-            # joblib.dump(benign_data, './benign_data.pkl')
-            # joblib.dump(adversarial_data, './adversarial_data.pkl')
-            # joblib.dump(benign_output, './benign_output.pkl')
-            # joblib.dump(adversarial_output, './adversarial_output.pkl')
-            # joblib.dump(target_output, './target_output.pkl')
+                if i == 0:
+                    benign_data = benign_data_temp
+                    adversarial_data = adversarial_data_temp
+                    benign_output = benign_output_temp
+                    adversarial_output = adversarial_output_temp
+                    target_output = target_output_temp
+                else:
+                    benign_data = np.append(benign_data, benign_data_temp)
+                    adversarial_data = np.append(adversarial_data, adversarial_data_temp)
+                    benign_output = np.append(benign_output, benign_output_temp)
+                    adversarial_output = np.append(adversarial_output, adversarial_output_temp)
+                    target_output = np.append(target_output, target_output_temp)
+
+            joblib.dump(benign_data, './benign_data.pkl')
+            joblib.dump(adversarial_data, './adversarial_data.pkl')
+            joblib.dump(benign_output, './benign_output.pkl')
+            joblib.dump(adversarial_output, './adversarial_output.pkl')
+            joblib.dump(target_output, './target_output.pkl')
             # Nawawy's MIMIC end
 
         
@@ -299,23 +299,22 @@ class DL_models():
 
         # Nawawy's MIMIC start
         terminal_output = open('/dev/stdout', 'w')
-        # benign_data = False
-        # adversarial_data = False
-        # benign_output = False
-        # target_output = False
-        # adversarial_output = False
+        benign_data = []
+        adversarial_data = []
+        benign_output = []
+        target_output = []
+        adversarial_output = []
         # Nawawy's MIMIC end
         for nbatch in range(int(len(test_hids)/(args.batch_size))):
             print('nbatch = '+str(nbatch), file=terminal_output)
             #print(test_hids[nbatch*args.batch_size:(nbatch+1)*args.batch_size])
             meds,chart,out,proc,lab,stat,demo,y=self.getXY(test_hids[nbatch*args.batch_size:(nbatch+1)*args.batch_size],labels)
 
-            # for nbatch in range(int(len(train_hids) / (args.batch_size))):
             # Nawawy's MIMIC start
-            # if nbatch == 0:
-            #     target_output = y.numpy()
-            # else:
-            #     target_output = np.append(target_output, y.numpy())
+            if nbatch == 0:
+                target_output = y.data().cpu().numpy()
+            else:
+                target_output = np.append(target_output, y.data().cpu().numpy())
             # CALL URET HERE
             if adversary:
                 explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
@@ -335,12 +334,12 @@ class DL_models():
                 stat = allPatients_adversarial[5]
                 demo = allPatients_adversarial[6]
 
-                # if nbatch == 0:
-                #     benign_data = allPatients_benign[1].numpy()                                             # benign chart
-                #     adversarial_data = allPatients_adversarial[1].numpy()                                   # adversarial chart
-                # else:
-                #     benign_data = np.append(benign_data, allPatients_benign[1].numpy())                     # benign chart
-                #     adversarial_data = np.append(adversarial_data, allPatients_adversarial[1].numpy())      # adversarial chart
+                if nbatch == 0:
+                    benign_data = allPatients_benign[1].data().cpu().numpy()                                             # benign chart
+                    adversarial_data = allPatients_adversarial[1].data().cpu().numpy()                                   # adversarial chart
+                else:
+                    benign_data = np.append(benign_data, allPatients_benign[1].data().cpu().numpy())                     # benign chart
+                    adversarial_data = np.append(adversarial_data, allPatients_adversarial[1].data().cpu().numpy())      # adversarial chart
 
                 # allPatients_adversarial = np.array(explorer.explore(explore_params))
                 #
@@ -368,16 +367,16 @@ class DL_models():
             output,logits = self.net(meds,chart,out,proc,lab,stat,demo)
 #             self.model_interpret([meds,chart,out,proc,lab,stat,demo])
 #             # Nawawy's MIMIC start
-#             if adversary:
-#                 if nbatch == 0:
-#                     adversarial_output = output.detach().numpy()
-#                 else:
-#                     adversarial_output = np.append(adversarial_output, output.detach().numpy())
-#             else:
-#                 if nbatch == 0:
-#                     benign_output = output.detach().numpy()
-#                 else:
-#                     benign_output = np.append(benign_output, output.detach().numpy())
+            if adversary:
+                if nbatch == 0:
+                    adversarial_output = output.data().cpu().numpy()
+                else:
+                    adversarial_output = np.append(adversarial_output, output.data().cpu().numpy())
+            else:
+                if nbatch == 0:
+                    benign_output = output.data().cpu().numpy()
+                else:
+                    benign_output = np.append(benign_output, output.data().cpu().numpy())
 #             # Nawawy's MIMIC end
             output=output.squeeze()
             logits=logits.squeeze()
