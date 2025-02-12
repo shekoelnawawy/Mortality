@@ -106,6 +106,11 @@ class DL_models():
 
             # Nawawy's MIMIC start
             k_hids = joblib.load('./k_hids/k_hids.pkl')
+            benign_data = []
+            adversarial_data = []
+            benign_output = []
+            target_output = []
+            adversarial_output = []
             for i in range(self.k_fold):
                 print("==================={0:2d} FOLD=====================".format(i))
                 test_hids = list(k_hids[i])
@@ -394,7 +399,7 @@ class DL_models():
         #print(self.eth)
         self.loss(torch.tensor(self.prob),torch.tensor(self.truth),torch.tensor(self.logits),False,False)
         # Nawawy's MIMIC start
-        # return benign_data, adversarial_data, benign_output, adversarial_output, target_output
+        return benign_data, adversarial_data, benign_output, adversarial_output, target_output
         # Nawawy's MIMIC end
     def model_interpret(self,meds,chart,out,proc,lab,stat,demo):
         meds=torch.tensor(meds).float()
