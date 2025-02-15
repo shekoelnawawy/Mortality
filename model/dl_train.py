@@ -316,16 +316,12 @@ class DL_models():
             meds,chart,out,proc,lab,stat,demo,y=self.getXY(test_hids[nbatch*args.batch_size:(nbatch+1)*args.batch_size],labels)
 
             # Nawawy's MIMIC start
-            # if nbatch == 0:
-            #     target_output = y.numpy()
-            # else:
-            #     target_output = np.append(target_output, y.numpy())
+            allPatients_benign = meds, chart, out, proc, lab, stat, demo
+
             # CALL URET HERE
             if adversary:
                 explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
                 explorer.scoring_function = self.loss
-
-                allPatients_benign = meds, chart, out, proc, lab, stat, demo
 
                 explore_params = [allPatients_benign, chart.shape[1], chart.shape[2], y]
 
