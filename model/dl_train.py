@@ -334,35 +334,6 @@ class DL_models():
                 lab = allPatients_adversarial[4]
                 stat = allPatients_adversarial[5]
                 demo = allPatients_adversarial[6]
-
-                # if nbatch == 0:
-                #     benign_data = allPatients_benign[1].detach().cpu().numpy()                                             # benign chart
-                #     adversarial_data = allPatients_adversarial[1].detach().cpu().numpy()                                   # adversarial chart
-                # else:
-                #     benign_data = np.append(benign_data, allPatients_benign[1].detach().cpu().numpy())                     # benign chart
-                #     adversarial_data = np.append(adversarial_data, allPatients_adversarial[1].detach().cpu().numpy())      # adversarial chart
-
-                # allPatients_adversarial = np.array(explorer.explore(explore_params))
-                #
-                # allPatients_benign = allPatients_benign.reshape(-1, backcast_length, nv)  # 15701, 12, 7
-                # allPatients_postprandial = allPatients_postprandial.reshape(-1, backcast_length, nv + 1)  # 15701, 12, 8
-                # for i in range(len(allPatients_adversarial)):
-                #     if allPatients_adversarial[i] is None:
-                #         allPatients_adversarial[i] = allPatients_benign[i].reshape(1, backcast_length, nv).copy()
-                #     if i == 0:
-                #         temp = allPatients_adversarial[i].reshape(1, backcast_length, nv)
-                #     else:
-                #         temp = np.append(temp, allPatients_adversarial[i].reshape(1, backcast_length, nv))
-                #
-                # allPatients_adversarial = temp.reshape((1, len(allPatients_adversarial) * backcast_length, nv))
-                #
-                # testgen = ordered_data(batch_size, backcast_length, forecast_length, allPatients_adversarial)
-                #
-                # if backcast_length == 12:
-                #     allPatients_adversarial = allPatients_adversarial.reshape(-1, backcast_length, nv)  # 15701, 12, 7
-                #     joblib.dump(allPatients_postprandial, maindir + '/benign_data.pkl')
-                #     joblib.dump(allPatients_adversarial, maindir + '/adversarial_data.pkl')
-
             # Nawawy's MIMIC end
 
             output,logits = self.net(meds,chart,out,proc,lab,stat,demo)
