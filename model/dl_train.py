@@ -316,10 +316,10 @@ class DL_models():
             meds,chart,out,proc,lab,stat,demo,y=self.getXY(test_hids[nbatch*args.batch_size:(nbatch+1)*args.batch_size],labels)
 
             # Nawawy's MIMIC start
-            if nbatch == 0:
-                target_output = y.numpy()
-            else:
-                target_output = np.append(target_output, y.numpy())
+            # if nbatch == 0:
+            #     target_output = y.numpy()
+            # else:
+            #     target_output = np.append(target_output, y.numpy())
             # CALL URET HERE
             if adversary:
                 explorer = process_config_file(cf, self.net, feature_extractor=feature_extractor, input_processor_list=[])
@@ -339,12 +339,12 @@ class DL_models():
                 stat = allPatients_adversarial[5]
                 demo = allPatients_adversarial[6]
 
-                if nbatch == 0:
-                    benign_data = allPatients_benign[1].detach().cpu().numpy()                                             # benign chart
-                    adversarial_data = allPatients_adversarial[1].detach().cpu().numpy()                                   # adversarial chart
-                else:
-                    benign_data = np.append(benign_data, allPatients_benign[1].detach().cpu().numpy())                     # benign chart
-                    adversarial_data = np.append(adversarial_data, allPatients_adversarial[1].detach().cpu().numpy())      # adversarial chart
+                # if nbatch == 0:
+                #     benign_data = allPatients_benign[1].detach().cpu().numpy()                                             # benign chart
+                #     adversarial_data = allPatients_adversarial[1].detach().cpu().numpy()                                   # adversarial chart
+                # else:
+                #     benign_data = np.append(benign_data, allPatients_benign[1].detach().cpu().numpy())                     # benign chart
+                #     adversarial_data = np.append(adversarial_data, allPatients_adversarial[1].detach().cpu().numpy())      # adversarial chart
 
                 # allPatients_adversarial = np.array(explorer.explore(explore_params))
                 #
@@ -373,16 +373,22 @@ class DL_models():
 #             self.model_interpret([meds,chart,out,proc,lab,stat,demo])
 #             # Nawawy's MIMIC start
             if nbatch == 0:
+                target_output = y.numpy()
                 if adversary:
                     adversarial_output = output.detach().cpu().numpy()
+                    adversarial_data = allPatients_adversarial[1].detach().cpu().numpy()
                 else:
                     benign_output = output.detach().cpu().numpy()
+                    benign_data = allPatients_benign[1].detach().cpu().numpy()                                             # benign chart
 
             else:
+                target_output = np.append(target_output, y.numpy())
                 if adversary:
                     adversarial_output = np.append(adversarial_output, output.detach().cpu().numpy())
+                    adversarial_data = np.append(adversarial_data, allPatients_adversarial[1].detach().cpu().numpy())      # adversarial chart
                 else:
                     benign_output = np.append(benign_output, output.detach().cpu().numpy())
+                    benign_data = np.append(benign_data, allPatients_benign[1].detach().cpu().numpy())                     # benign chart
 #             # Nawawy's MIMIC end
             output=output.squeeze()
             logits=logits.squeeze()
