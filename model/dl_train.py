@@ -372,14 +372,15 @@ class DL_models():
             output,logits = self.net(meds,chart,out,proc,lab,stat,demo)
 #             self.model_interpret([meds,chart,out,proc,lab,stat,demo])
 #             # Nawawy's MIMIC start
-            if adversary:
-                if nbatch == 0:
+            if nbatch == 0:
+                if adversary:
                     adversarial_output = output.detach().cpu().numpy()
                 else:
-                    adversarial_output = np.append(adversarial_output, output.detach().cpu().numpy())
-            else:
-                if nbatch == 0:
                     benign_output = output.detach().cpu().numpy()
+
+            else:
+                if adversary:
+                    adversarial_output = np.append(adversarial_output, output.detach().cpu().numpy())
                 else:
                     benign_output = np.append(benign_output, output.detach().cpu().numpy())
 #             # Nawawy's MIMIC end
