@@ -115,7 +115,7 @@ class DL_models():
                 print("==================={0:2d} FOLD=====================".format(i))
                 test_hids = list(k_hids[i])
                 # self.model_test(test_hids, adversary=True)
-                benign_data_temp, adversarial_data_temp, benign_output_temp, adversarial_output_temp, target_output_temp = self.model_test(test_hids, adversary=True)
+                benign_data_temp, adversarial_data_temp, benign_output_temp, adversarial_output_temp, target_output_temp = self.model_test(test_hids, adversary=False)
 
                 if i == 0:
                     benign_data = benign_data_temp
