@@ -370,21 +370,21 @@ class DL_models():
 #             # Nawawy's MIMIC start
             if nbatch == 0:
                 target_output = y.numpy()
+                benign_data = allPatients_benign[1].detach().cpu().numpy()       # benign chart
                 if adversary:
                     adversarial_output = output.detach().cpu().numpy()
                     adversarial_data = allPatients_adversarial[1].detach().cpu().numpy()
                 else:
                     benign_output = output.detach().cpu().numpy()
-                    benign_data = allPatients_benign[1].detach().cpu().numpy()                                             # benign chart
 
             else:
                 target_output = np.append(target_output, y.numpy())
+                benign_data = np.append(benign_data, allPatients_benign[1].detach().cpu().numpy())                     # benign chart
                 if adversary:
                     adversarial_output = np.append(adversarial_output, output.detach().cpu().numpy())
                     adversarial_data = np.append(adversarial_data, allPatients_adversarial[1].detach().cpu().numpy())      # adversarial chart
                 else:
                     benign_output = np.append(benign_output, output.detach().cpu().numpy())
-                    benign_data = np.append(benign_data, allPatients_benign[1].detach().cpu().numpy())                     # benign chart
 #             # Nawawy's MIMIC end
             output=output.squeeze()
             logits=logits.squeeze()
