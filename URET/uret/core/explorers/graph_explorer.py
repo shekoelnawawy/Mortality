@@ -204,7 +204,8 @@ class GraphExplorer(ABC):
                     best_record = transformation_record
                 break
             # Nawway's MIMIC start
-            elif (new_prediction.data.cpu().numpy()>=0.5).sum() >= (original_pred.data.cpu().numpy()>=0.5).sum() and (new_prediction.data.cpu().numpy()>=0.5).sum() > (score_input.data.cpu().numpy()>=0.5).sum():
+            # elif (new_prediction.data.cpu().numpy()>=0.5).sum() >= (original_pred.data.cpu().numpy()>=0.5).sum() and (new_prediction.data.cpu().numpy()>=0.5).sum() > (score_input.data.cpu().numpy()>=0.5).sum():
+            elif (np.subtract(new_prediction.data.cpu().numpy(), original_pred.data.cpu().numpy()) >= 0.4).sum() >= len(new_prediction.data.cpu().numpy())*0.3:
             # Nawawy's MIMIC end
                 best_sample = sample_next
                 best_score = score
